@@ -10,7 +10,32 @@
 		EB9713EA17961CD20005E31E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB9713E917961CD20005E31E /* Foundation.framework */; };
 		EB9713EF17961CD20005E31E /* AMYServer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EB9713EE17961CD20005E31E /* AMYServer.h */; };
 		EB9713F117961CD20005E31E /* AMYServer.m in Sources */ = {isa = PBXBuildFile; fileRef = EB9713F017961CD20005E31E /* AMYServer.m */; };
+		EB9713FD179657410005E31E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB9713FC179657410005E31E /* UIKit.framework */; };
+		EB9713FE179657410005E31E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB9713E917961CD20005E31E /* Foundation.framework */; };
+		EB971400179657410005E31E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB9713FF179657410005E31E /* CoreGraphics.framework */; };
+		EB971406179657410005E31E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB971404179657410005E31E /* InfoPlist.strings */; };
+		EB971408179657410005E31E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EB971407179657410005E31E /* main.m */; };
+		EB97140C179657410005E31E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EB97140B179657410005E31E /* AppDelegate.m */; };
+		EB97140E179657410005E31E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = EB97140D179657410005E31E /* Default.png */; };
+		EB971410179657410005E31E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EB97140F179657410005E31E /* Default@2x.png */; };
+		EB971412179657410005E31E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EB971411179657410005E31E /* Default-568h@2x.png */; };
+		EB971415179657410005E31E /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB971413179657410005E31E /* MainStoryboard.storyboard */; };
+		EB971418179657410005E31E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB971417179657410005E31E /* ViewController.m */; };
+		EB971423179657770005E31E /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB971422179657770005E31E /* SenTestingKit.framework */; };
+		EB971424179657770005E31E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB9713FC179657410005E31E /* UIKit.framework */; };
+		EB971425179657770005E31E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB9713E917961CD20005E31E /* Foundation.framework */; };
+		EB97142B179657770005E31E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB971429179657770005E31E /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EB971433179658250005E31E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB9713DE17961CD20005E31E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EB9713FA179657410005E31E;
+			remoteInfo = "Test Host";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		EB9713E417961CD20005E31E /* CopyFiles */ = {
@@ -31,6 +56,26 @@
 		EB9713ED17961CD20005E31E /* AMYServer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMYServer-Prefix.pch"; sourceTree = "<group>"; };
 		EB9713EE17961CD20005E31E /* AMYServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMYServer.h; sourceTree = "<group>"; };
 		EB9713F017961CD20005E31E /* AMYServer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMYServer.m; sourceTree = "<group>"; };
+		EB9713FB179657410005E31E /* Test Host.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Test Host.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB9713FC179657410005E31E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		EB9713FF179657410005E31E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		EB971403179657410005E31E /* Test Host-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Test Host-Info.plist"; sourceTree = "<group>"; };
+		EB971405179657410005E31E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EB971407179657410005E31E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EB971409179657410005E31E /* Test Host-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Test Host-Prefix.pch"; sourceTree = "<group>"; };
+		EB97140A179657410005E31E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EB97140B179657410005E31E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EB97140D179657410005E31E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		EB97140F179657410005E31E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		EB971411179657410005E31E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		EB971414179657410005E31E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		EB971416179657410005E31E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		EB971417179657410005E31E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		EB971421179657770005E31E /* AMYServer Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AMYServer Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB971422179657770005E31E /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		EB971428179657770005E31E /* AMYServer Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMYServer Tests-Info.plist"; sourceTree = "<group>"; };
+		EB97142A179657770005E31E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EB97142F179657770005E31E /* AMYServer Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMYServer Tests-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +87,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EB9713F8179657410005E31E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB9713FD179657410005E31E /* UIKit.framework in Frameworks */,
+				EB9713FE179657410005E31E /* Foundation.framework in Frameworks */,
+				EB971400179657410005E31E /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB97141D179657770005E31E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB971423179657770005E31E /* SenTestingKit.framework in Frameworks */,
+				EB971424179657770005E31E /* UIKit.framework in Frameworks */,
+				EB971425179657770005E31E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -49,6 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				EB9713EB17961CD20005E31E /* AMYServer */,
+				EB971401179657410005E31E /* Test Host */,
+				EB971426179657770005E31E /* AMYServer Tests */,
 				EB9713E817961CD20005E31E /* Frameworks */,
 				EB9713E717961CD20005E31E /* Products */,
 			);
@@ -58,6 +125,8 @@
 			isa = PBXGroup;
 			children = (
 				EB9713E617961CD20005E31E /* libAMYServer.a */,
+				EB9713FB179657410005E31E /* Test Host.app */,
+				EB971421179657770005E31E /* AMYServer Tests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -66,6 +135,9 @@
 			isa = PBXGroup;
 			children = (
 				EB9713E917961CD20005E31E /* Foundation.framework */,
+				EB9713FC179657410005E31E /* UIKit.framework */,
+				EB9713FF179657410005E31E /* CoreGraphics.framework */,
+				EB971422179657770005E31E /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -84,6 +156,51 @@
 			isa = PBXGroup;
 			children = (
 				EB9713ED17961CD20005E31E /* AMYServer-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EB971401179657410005E31E /* Test Host */ = {
+			isa = PBXGroup;
+			children = (
+				EB97140A179657410005E31E /* AppDelegate.h */,
+				EB97140B179657410005E31E /* AppDelegate.m */,
+				EB971413179657410005E31E /* MainStoryboard.storyboard */,
+				EB971416179657410005E31E /* ViewController.h */,
+				EB971417179657410005E31E /* ViewController.m */,
+				EB971402179657410005E31E /* Supporting Files */,
+			);
+			path = "Test Host";
+			sourceTree = "<group>";
+		};
+		EB971402179657410005E31E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EB971403179657410005E31E /* Test Host-Info.plist */,
+				EB971404179657410005E31E /* InfoPlist.strings */,
+				EB971407179657410005E31E /* main.m */,
+				EB971409179657410005E31E /* Test Host-Prefix.pch */,
+				EB97140D179657410005E31E /* Default.png */,
+				EB97140F179657410005E31E /* Default@2x.png */,
+				EB971411179657410005E31E /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EB971426179657770005E31E /* AMYServer Tests */ = {
+			isa = PBXGroup;
+			children = (
+				EB971427179657770005E31E /* Supporting Files */,
+			);
+			path = "AMYServer Tests";
+			sourceTree = "<group>";
+		};
+		EB971427179657770005E31E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EB971428179657770005E31E /* AMYServer Tests-Info.plist */,
+				EB971429179657770005E31E /* InfoPlist.strings */,
+				EB97142F179657770005E31E /* AMYServer Tests-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -108,6 +225,42 @@
 			productReference = EB9713E617961CD20005E31E /* libAMYServer.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		EB9713FA179657410005E31E /* Test Host */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB971419179657410005E31E /* Build configuration list for PBXNativeTarget "Test Host" */;
+			buildPhases = (
+				EB9713F7179657410005E31E /* Sources */,
+				EB9713F8179657410005E31E /* Frameworks */,
+				EB9713F9179657410005E31E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Test Host";
+			productName = "Test Host";
+			productReference = EB9713FB179657410005E31E /* Test Host.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EB971420179657770005E31E /* AMYServer Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB971430179657770005E31E /* Build configuration list for PBXNativeTarget "AMYServer Tests" */;
+			buildPhases = (
+				EB97141C179657770005E31E /* Sources */,
+				EB97141D179657770005E31E /* Frameworks */,
+				EB97141E179657770005E31E /* Resources */,
+				EB97141F179657770005E31E /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EB971434179658250005E31E /* PBXTargetDependency */,
+			);
+			name = "AMYServer Tests";
+			productName = "AMYServer Tests";
+			productReference = EB971421179657770005E31E /* AMYServer Tests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -130,9 +283,50 @@
 			projectRoot = "";
 			targets = (
 				EB9713E517961CD20005E31E /* AMYServer */,
+				EB9713FA179657410005E31E /* Test Host */,
+				EB971420179657770005E31E /* AMYServer Tests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EB9713F9179657410005E31E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB971406179657410005E31E /* InfoPlist.strings in Resources */,
+				EB97140E179657410005E31E /* Default.png in Resources */,
+				EB971410179657410005E31E /* Default@2x.png in Resources */,
+				EB971412179657410005E31E /* Default-568h@2x.png in Resources */,
+				EB971415179657410005E31E /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB97141E179657770005E31E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB97142B179657770005E31E /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EB97141F179657770005E31E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EB9713E217961CD20005E31E /* Sources */ = {
@@ -143,7 +337,59 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EB9713F7179657410005E31E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB971408179657410005E31E /* main.m in Sources */,
+				EB97140C179657410005E31E /* AppDelegate.m in Sources */,
+				EB971418179657410005E31E /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB97141C179657770005E31E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EB971434179658250005E31E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EB9713FA179657410005E31E /* Test Host */;
+			targetProxy = EB971433179658250005E31E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EB971404179657410005E31E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EB971405179657410005E31E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		EB971413179657410005E31E /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EB971414179657410005E31E /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		EB971429179657770005E31E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EB97142A179657770005E31E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		EB9713F217961CD20005E31E /* Debug */ = {
@@ -223,6 +469,65 @@
 			};
 			name = Release;
 		};
+		EB97141A179657410005E31E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Test Host/Test Host-Prefix.pch";
+				INFOPLIST_FILE = "Test Host/Test Host-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		EB97141B179657410005E31E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Test Host/Test Host-Prefix.pch";
+				INFOPLIST_FILE = "Test Host/Test Host-Info.plist";
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		EB971431179657770005E31E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Test Host.app/Test Host";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AMYServer Tests/AMYServer Tests-Prefix.pch";
+				INFOPLIST_FILE = "AMYServer Tests/AMYServer Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		EB971432179657770005E31E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Test Host.app/Test Host";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AMYServer Tests/AMYServer Tests-Prefix.pch";
+				INFOPLIST_FILE = "AMYServer Tests/AMYServer Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -240,6 +545,22 @@
 			buildConfigurations = (
 				EB9713F517961CD20005E31E /* Debug */,
 				EB9713F617961CD20005E31E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EB971419179657410005E31E /* Build configuration list for PBXNativeTarget "Test Host" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB97141A179657410005E31E /* Debug */,
+				EB97141B179657410005E31E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EB971430179657770005E31E /* Build configuration list for PBXNativeTarget "AMYServer Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB971431179657770005E31E /* Debug */,
+				EB971432179657770005E31E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
