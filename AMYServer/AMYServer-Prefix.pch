@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'AMYServer' target in the 'AMYServer' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif
