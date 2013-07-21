@@ -1,0 +1,14 @@
+PODS:
+  - KIF-next (2.0.0pre2)
+
+DEPENDENCIES:
+  - KIF-next (from `../KIF`)
+
+EXTERNAL SOURCES:
+  KIF-next:
+    :path: ../KIF
+
+SPEC CHECKSUMS:
+  KIF-next: d77f4d1a1f2f280266ab87d62b2020e9ba39c204
+
+COCOAPODS: 0.22.2

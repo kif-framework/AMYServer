@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5641C68D282B4F7C8E987DB7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C65A889641443929FA2D0A6 /* libPods.a */; };
+		D8941B57AA6B462F808362B6 /* libPods-AMYServer Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFA695D96E74AD0B14ECB01 /* libPods-AMYServer Tests.a */; };
 		EB9713EA17961CD20005E31E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB9713E917961CD20005E31E /* Foundation.framework */; };
 		EB9713EF17961CD20005E31E /* AMYServer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EB9713EE17961CD20005E31E /* AMYServer.h */; };
 		EB9713F117961CD20005E31E /* AMYServer.m in Sources */ = {isa = PBXBuildFile; fileRef = EB9713F017961CD20005E31E /* AMYServer.m */; };
@@ -25,6 +27,13 @@
 		EB971424179657770005E31E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB9713FC179657410005E31E /* UIKit.framework */; };
 		EB971425179657770005E31E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB9713E917961CD20005E31E /* Foundation.framework */; };
 		EB97142B179657770005E31E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB971429179657770005E31E /* InfoPlist.strings */; };
+		EB97143717965CC70005E31E /* AMYRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EB97143617965CC70005E31E /* AMYRequest.m */; };
+		EB97143A179660B10005E31E /* _AMYURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = EB971439179660B10005E31E /* _AMYURLProtocol.m */; };
+		EB97143D17966E740005E31E /* AMYServerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB97143C17966E740005E31E /* AMYServerTests.m */; };
+		EB97143F1796706D0005E31E /* AMYServer.m in Sources */ = {isa = PBXBuildFile; fileRef = EB9713F017961CD20005E31E /* AMYServer.m */; };
+		EB9714401796706D0005E31E /* AMYRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = EB97143617965CC70005E31E /* AMYRequest.m */; };
+		EB9714411796706D0005E31E /* _AMYURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = EB971439179660B10005E31E /* _AMYURLProtocol.m */; };
+		EB971444179BAD210005E31E /* ExampleServer.m in Sources */ = {isa = PBXBuildFile; fileRef = EB971443179BAD210005E31E /* ExampleServer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +60,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		11F29E78EBF54D7DB567C2F0 /* Pods-AMYServer Tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AMYServer Tests.xcconfig"; path = "Pods/Pods-AMYServer Tests.xcconfig"; sourceTree = SOURCE_ROOT; };
+		2CFA695D96E74AD0B14ECB01 /* libPods-AMYServer Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AMYServer Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		660DAD8CDF4041B6ADB992C7 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		7C65A889641443929FA2D0A6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB9713E617961CD20005E31E /* libAMYServer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAMYServer.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB9713E917961CD20005E31E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EB9713ED17961CD20005E31E /* AMYServer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMYServer-Prefix.pch"; sourceTree = "<group>"; };
@@ -76,6 +89,13 @@
 		EB971428179657770005E31E /* AMYServer Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMYServer Tests-Info.plist"; sourceTree = "<group>"; };
 		EB97142A179657770005E31E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EB97142F179657770005E31E /* AMYServer Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMYServer Tests-Prefix.pch"; sourceTree = "<group>"; };
+		EB97143517965CC70005E31E /* AMYRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMYRequest.h; sourceTree = "<group>"; };
+		EB97143617965CC70005E31E /* AMYRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMYRequest.m; sourceTree = "<group>"; };
+		EB971438179660B10005E31E /* _AMYURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _AMYURLProtocol.h; sourceTree = "<group>"; };
+		EB971439179660B10005E31E /* _AMYURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _AMYURLProtocol.m; sourceTree = "<group>"; };
+		EB97143C17966E740005E31E /* AMYServerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMYServerTests.m; sourceTree = "<group>"; };
+		EB971442179BAD210005E31E /* ExampleServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleServer.h; sourceTree = "<group>"; };
+		EB971443179BAD210005E31E /* ExampleServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleServer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +104,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB9713EA17961CD20005E31E /* Foundation.framework in Frameworks */,
+				5641C68D282B4F7C8E987DB7 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +125,7 @@
 				EB971423179657770005E31E /* SenTestingKit.framework in Frameworks */,
 				EB971424179657770005E31E /* UIKit.framework in Frameworks */,
 				EB971425179657770005E31E /* Foundation.framework in Frameworks */,
+				D8941B57AA6B462F808362B6 /* libPods-AMYServer Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +140,8 @@
 				EB971426179657770005E31E /* AMYServer Tests */,
 				EB9713E817961CD20005E31E /* Frameworks */,
 				EB9713E717961CD20005E31E /* Products */,
+				660DAD8CDF4041B6ADB992C7 /* Pods.xcconfig */,
+				11F29E78EBF54D7DB567C2F0 /* Pods-AMYServer Tests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -138,6 +162,8 @@
 				EB9713FC179657410005E31E /* UIKit.framework */,
 				EB9713FF179657410005E31E /* CoreGraphics.framework */,
 				EB971422179657770005E31E /* SenTestingKit.framework */,
+				7C65A889641443929FA2D0A6 /* libPods.a */,
+				2CFA695D96E74AD0B14ECB01 /* libPods-AMYServer Tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -147,6 +173,10 @@
 			children = (
 				EB9713EE17961CD20005E31E /* AMYServer.h */,
 				EB9713F017961CD20005E31E /* AMYServer.m */,
+				EB97143517965CC70005E31E /* AMYRequest.h */,
+				EB97143617965CC70005E31E /* AMYRequest.m */,
+				EB971438179660B10005E31E /* _AMYURLProtocol.h */,
+				EB971439179660B10005E31E /* _AMYURLProtocol.m */,
 				EB9713EC17961CD20005E31E /* Supporting Files */,
 			);
 			path = AMYServer;
@@ -191,6 +221,9 @@
 			isa = PBXGroup;
 			children = (
 				EB971427179657770005E31E /* Supporting Files */,
+				EB971442179BAD210005E31E /* ExampleServer.h */,
+				EB971443179BAD210005E31E /* ExampleServer.m */,
+				EB97143C17966E740005E31E /* AMYServerTests.m */,
 			);
 			path = "AMYServer Tests";
 			sourceTree = "<group>";
@@ -212,9 +245,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EB9713F417961CD20005E31E /* Build configuration list for PBXNativeTarget "AMYServer" */;
 			buildPhases = (
+				E79771CA95A84C55A073E35A /* Check Pods Manifest.lock */,
 				EB9713E217961CD20005E31E /* Sources */,
 				EB9713E317961CD20005E31E /* Frameworks */,
 				EB9713E417961CD20005E31E /* CopyFiles */,
+				1EDDE62DCBCC44D0A2215756 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -246,10 +281,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EB971430179657770005E31E /* Build configuration list for PBXNativeTarget "AMYServer Tests" */;
 			buildPhases = (
+				F13796A2765D4387BC1B60A2 /* Check Pods Manifest.lock */,
 				EB97141C179657770005E31E /* Sources */,
 				EB97141D179657770005E31E /* Frameworks */,
 				EB97141E179657770005E31E /* Resources */,
 				EB97141F179657770005E31E /* ShellScript */,
+				7ECFE7FA6EA248D68FDB004A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -313,6 +350,51 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1EDDE62DCBCC44D0A2215756 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7ECFE7FA6EA248D68FDB004A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-AMYServer Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E79771CA95A84C55A073E35A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		EB97141F179657770005E31E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -326,6 +408,21 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
+		F13796A2765D4387BC1B60A2 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -334,6 +431,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB9713F117961CD20005E31E /* AMYServer.m in Sources */,
+				EB97143717965CC70005E31E /* AMYRequest.m in Sources */,
+				EB97143A179660B10005E31E /* _AMYURLProtocol.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +450,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB97143D17966E740005E31E /* AMYServerTests.m in Sources */,
+				EB97143F1796706D0005E31E /* AMYServer.m in Sources */,
+				EB9714401796706D0005E31E /* AMYRequest.m in Sources */,
+				EB9714411796706D0005E31E /* _AMYURLProtocol.m in Sources */,
+				EB971444179BAD210005E31E /* ExampleServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -447,6 +551,7 @@
 		};
 		EB9713F517961CD20005E31E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 660DAD8CDF4041B6ADB992C7 /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/AMYServer.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -459,6 +564,7 @@
 		};
 		EB9713F617961CD20005E31E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 660DAD8CDF4041B6ADB992C7 /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/AMYServer.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -496,12 +602,9 @@
 		};
 		EB971431179657770005E31E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11F29E78EBF54D7DB567C2F0 /* Pods-AMYServer Tests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Test Host.app/Test Host";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMYServer Tests/AMYServer Tests-Prefix.pch";
 				INFOPLIST_FILE = "AMYServer Tests/AMYServer Tests-Info.plist";
@@ -513,12 +616,9 @@
 		};
 		EB971432179657770005E31E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11F29E78EBF54D7DB567C2F0 /* Pods-AMYServer Tests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Test Host.app/Test Host";
-				FRAMEWORK_SEARCH_PATHS = (
-					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
-					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMYServer Tests/AMYServer Tests-Prefix.pch";
 				INFOPLIST_FILE = "AMYServer Tests/AMYServer Tests-Info.plist";
@@ -547,6 +647,7 @@
 				EB9713F617961CD20005E31E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EB971419179657410005E31E /* Build configuration list for PBXNativeTarget "Test Host" */ = {
 			isa = XCConfigurationList;
@@ -555,6 +656,7 @@
 				EB97141B179657410005E31E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EB971430179657770005E31E /* Build configuration list for PBXNativeTarget "AMYServer Tests" */ = {
 			isa = XCConfigurationList;
@@ -563,6 +665,7 @@
 				EB971432179657770005E31E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

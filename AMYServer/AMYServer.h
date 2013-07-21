@@ -6,8 +6,16 @@
 //  Copyright (c) 2013 Brian Nickel. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <KIF.h>
+#import "AMYRequest.h"
 
-@interface AMYServer : NSObject
+@interface AMYServer : KIFTestActor
+
+@property (nonatomic, readonly) NSURL *baseURL;
+
+- (AMYRequest *)waitForRequestMatchingBlock:(KIFTestStepResult (^)(NSURLRequest *request, NSError **error))block;
+
+- (void)start;
+- (void)stop;
 
 @end
