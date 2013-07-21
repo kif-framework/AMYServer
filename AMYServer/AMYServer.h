@@ -12,6 +12,7 @@
 @interface AMYServer : KIFTestActor
 
 @property (nonatomic, readonly) NSURL *baseURL;
+@property (nonatomic, readonly) NSArray *pendingURLRequests;
 
 - (AMYRequest *)waitForRequestMatchingBlock:(KIFTestStepResult (^)(NSURLRequest *request, NSError **error))block;
 

@@ -19,5 +19,6 @@
 + (AMYRequest *)findAndRemoveRequestMatchingBaseURL:(NSURL *)baseURL block:(KIFTestStepResult (^)(NSURLRequest *URLRequest, NSError **error))block error:(NSError **)error;
 + (void)startMonitoringURL:(NSURL *)URL;
 + (void)stopMonitoringURL:(NSURL *)URL;
++ (NSArray *)pendingURLRequestsMatchingBaseURL:(NSURL *)baseURL;
 
 @end

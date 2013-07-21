@@ -8,6 +8,16 @@
 
 #import "ExampleServer.h"
 
+static inline NSString *pendingRequests(ExampleServer *server) {
+    NSMutableArray *serviceRequests = [NSMutableArray array];
+    for (NSURLRequest *request in server.pendingURLRequests) {
+        [serviceRequests addObject:request.URL.lastPathComponent];
+    }
+    return [serviceRequests componentsJoinedByString:@", "];
+}
+
+#define waitForValueAtKeyPath(value, keypath, obj, error) KIFTestWaitCondition([value isEqual:[obj valueForKeyPath:keypath]], error, @"Waiting for %@=%@ in %@", keypath, value, obj)
+
 @implementation ExampleServer
 
 - (NSURL *)baseURL
@@ -19,7 +29,7 @@
 {
     return [self waitForRequestMatchingBlock:^KIFTestStepResult(NSURLRequest *request, NSError **error) {
         
-        KIFTestWaitCondition([request.URL.lastPathComponent isEqualToString:serviceRequest], error, @"Could not find request for %@", serviceRequest);
+        KIFTestWaitCondition([request.URL.lastPathComponent isEqualToString:serviceRequest], error, @"Could not find request for %@. Found requests for %@.", serviceRequest, pendingRequests(self));
         
         id json = [NSJSONSerialization JSONObjectWithData:request.HTTPBody options:0 error:NULL];
         return block(json, error);
@@ -29,10 +39,8 @@
 - (void)waitForLoginWithUsername:(NSString *)username password:(NSString *)password andRespondWithSuccess:(BOOL)success message:(NSString *)message token:(NSString *)token
 {
     AMYRequest *request = [self waitForServiceRequest:@"login.json" withJSONDataMatchingBlock:^KIFTestStepResult(id json, NSError *__autoreleasing *error) {
-        
-        NSDictionary *dict = (NSDictionary *)json;
-        KIFTestWaitCondition([username isEqualToString:dict[@"username"]], error, @"Waiting for username=%@ in %@", username, dict);
-        KIFTestWaitCondition([password isEqualToString:dict[@"password"]], error, @"Waiting for password=%@ in %@", password, dict);
+        waitForValueAtKeyPath(username, @"username", json, error);
+        waitForValueAtKeyPath(password, @"password", json, error);
         return KIFTestStepResultSuccess;
     }];
     

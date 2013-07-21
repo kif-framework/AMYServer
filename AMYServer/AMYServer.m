@@ -18,6 +18,11 @@
     return nil;
 }
 
+- (NSArray *)pendingURLRequests
+{
+    return [_AMYURLProtocol pendingURLRequestsMatchingBaseURL:self.baseURL];
+}
+
 - (void)start
 {
     [_AMYURLProtocol startMonitoringURL:self.baseURL];

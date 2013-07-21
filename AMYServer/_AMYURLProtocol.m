@@ -67,21 +67,36 @@
 + (void)addRequestForProtocol:(_AMYURLProtocol *)protocol
 {
     AMYAssertMainThread();
-    [[self pendingRequests] addObject:[[AMYRequest alloc] initWithProtocol:protocol]];
+    [[self pendingRequests] addObject:protocol];
 }
 
 + (AMYRequest *)findAndRemoveRequestMatchingBaseURL:(NSURL *)baseURL block:(KIFTestStepResult (^)(NSURLRequest *URLRequest, NSError **error))block error:(NSError **)error
 {
     AMYAssertMainThread();
-    for (AMYRequest *request in [self pendingRequests]) {
-        if ([baseURL isEqual:[self baseURLForRequest:request.URLRequest]] && [request.protocol canRespond] && block(request.URLRequest, error) == KIFTestStepResultSuccess) {
-            AMYRequest *strongRequest = request;
-            [[self pendingRequests] removeObject:request];
-            return strongRequest;
+    for (_AMYURLProtocol *protocol in [self pendingRequests]) {
+        if ([baseURL isEqual:[self baseURLForRequest:protocol.request]] && protocol.canRespond && block(protocol.request, error) == KIFTestStepResultSuccess) {
+            
+            AMYRequest *request = [[AMYRequest alloc] initWithProtocol:protocol];
+            [[self pendingRequests] removeObject:protocol];
+            return request;
         }
     }
     
     return nil;
+}
+
++ (NSArray *)pendingURLRequestsMatchingBaseURL:(NSURL *)baseURL
+{
+    AMYAssertMainThread();
+    NSMutableArray *URLRequests = [NSMutableArray array];
+    
+    for (_AMYURLProtocol *protocol in [self pendingRequests]) {
+        if ([baseURL isEqual:[self baseURLForRequest:protocol.request]] && protocol.canRespond) {
+            [URLRequests addObject:protocol.request];
+        }
+    }
+    
+    return URLRequests.copy;
 }
 
 + (void)startMonitoringURL:(NSURL *)URL
