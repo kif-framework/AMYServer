@@ -1,1 +1,1 @@
-../../../../KIF/Classes/KIFSystemTestActor.h
+../../KIF-next/Classes/KIFSystemTestActor.h

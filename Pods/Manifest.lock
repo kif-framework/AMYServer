@@ -1,14 +1,27 @@
 PODS:
+  - GRMustache (6.7.5):
+    - JRSwizzle (~> 1.0)
+  - JRSwizzle (1.0)
   - KIF-next (2.0.0pre2)
+  - Mocktail (1.2):
+    - GRMustache (~> 6.7.5)
 
 DEPENDENCIES:
-  - KIF-next (from `../KIF`)
+  - KIF-next (from `https://github.com/bnickel/KIF.git`, commit `53b84fbb2b`)
+  - Mocktail (from `https://github.com/bnickel/objc-mocktail.git`, commit `cd6568cdbf`)
 
 EXTERNAL SOURCES:
   KIF-next:
-    :path: ../KIF
+    :commit: 53b84fbb2b
+    :git: https://github.com/bnickel/KIF.git
+  Mocktail:
+    :commit: cd6568cdbf
+    :git: https://github.com/bnickel/objc-mocktail.git
 
 SPEC CHECKSUMS:
-  KIF-next: d77f4d1a1f2f280266ab87d62b2020e9ba39c204
+  GRMustache: fd8c4885861658b6bb79fedfbca10beb02edc97b
+  JRSwizzle: 6242ff38485d870fc2636899048ee1ab883ae587
+  KIF-next: b4ee028e8caacb2d08bde731a2a4e3b1ffd92c21
+  Mocktail: d9354ae1571971e20ad216b82e49bc0d3bf48324
 
 COCOAPODS: 0.22.2

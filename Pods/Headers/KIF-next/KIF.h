@@ -1,1 +1,1 @@
-../../../../KIF/Classes/KIF.h
+../../KIF-next/Classes/KIF.h

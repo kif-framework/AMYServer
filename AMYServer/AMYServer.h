@@ -15,6 +15,8 @@
 @property (nonatomic, readonly) NSArray *pendingURLRequests;
 
 - (AMYRequest *)waitForRequestMatchingBlock:(KIFTestStepResult (^)(NSURLRequest *request, NSError **error))block;
+- (void)waitForRequestMatchingMocktail:(NSString *)mocktail withHTTPBodyMatchingBlock:(KIFTestStepResult (^)(NSData *body, NSError **error))block andRespondWithValues:(NSDictionary *)values;
+- (void)waitForRequestMatchingMocktail:(NSString *)mocktail andRespondWithValues:(NSDictionary *)values;
 
 - (void)start;
 - (void)stop;

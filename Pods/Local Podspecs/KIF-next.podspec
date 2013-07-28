@@ -8,6 +8,6 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/bnickel/KIF.git", :tag => "KIF-next-2.0.0pre2" }
   s.platform     = :ios, '4.3'
   s.source_files = 'Classes', 'Additions'
-  s.public_header_files = 'Classes/**/*.h'
+  s.public_header_files = 'Classes/**/*.h', 'Additions/**/*-KIFAdditions.h'
   s.frameworks  = 'SenTestingKit', 'CoreGraphics'
 end

@@ -1,1 +1,1 @@
-../../../../KIF/Classes/KIFTestCase.h
+../../KIF-next/Classes/KIFTestCase.h

@@ -1,0 +1,10 @@
+POST
+login.json
+200
+application/json
+
+{
+    "success": true,
+    "message": "{{{message}}}",
+    "token": "{{{token}}}"
+}
