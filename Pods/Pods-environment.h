@@ -25,9 +25,3 @@
 // Please contact the author.
 // Version: 2.0.0pre3.
 
-// Mocktail
-#define COCOAPODS_POD_AVAILABLE_Mocktail
-#define COCOAPODS_VERSION_MAJOR_Mocktail 1
-#define COCOAPODS_VERSION_MINOR_Mocktail 2
-#define COCOAPODS_VERSION_PATCH_Mocktail 0
-

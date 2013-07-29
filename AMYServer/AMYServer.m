@@ -8,8 +8,8 @@
 
 #import "AMYServer.h"
 #import "_AMYURLProtocol.h"
+#import "_AMYMocktailResponse.h"
 #import "AMYRequest.h"
-#import <MocktailResponse.h>
 #import <NSBundle-KIFAdditions.h>
 #import <NSError-KIFAdditions.h>
 
@@ -60,8 +60,8 @@
 
 - (void)waitForRequestMatchingMocktail:(NSString *)mocktail withHTTPBodyMatchingBlock:(KIFTestStepResult (^)(NSData *, NSError *__autoreleasing *))block andRespondWithValues:(NSDictionary *)values
 {
-    NSURL *mocktailURL = [[[[NSBundle KIFTestBundle] resourceURL] URLByAppendingPathComponent:mocktail] URLByAppendingPathExtension:MocktailFileExtension];
-    MocktailResponse *response = [MocktailResponse responseFromFileAtURL:mocktailURL];
+    NSURL *mocktailURL = [[[[NSBundle KIFTestBundle] resourceURL] URLByAppendingPathComponent:mocktail] URLByAppendingPathExtension:_AMYMocktailFileExtension];
+    _AMYMocktailResponse *response = [_AMYMocktailResponse responseFromFileAtURL:mocktailURL];
     
     if (!response) {
         [self failWithError:[NSError KIFErrorWithCode:KIFTestStepResultFailure localizedDescriptionWithFormat:@"Failed to find valid mocktail named %@ at path %@", mocktail, mocktailURL.absoluteString] stopTest:YES];
@@ -78,7 +78,7 @@
         return KIFTestStepResultSuccess;
     }];
     
-    [request respondWithSatusCode:response.statusCode headerFields:response.headers];
+    [request respondWithSatusCode:response.statusCode headerFields:[response headersWithValues:values]];
     [request sendData:[response bodyWithValues:values]];
     [request close];
 }

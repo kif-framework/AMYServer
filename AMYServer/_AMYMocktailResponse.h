@@ -9,9 +9,9 @@
 
 #import <Foundation/Foundation.h>
 
-FOUNDATION_EXPORT NSString * const MocktailFileExtension;
+FOUNDATION_EXPORT NSString * const _AMYMocktailFileExtension;
 
-@interface MocktailResponse : NSObject
+@interface _AMYMocktailResponse : NSObject
 
 + (instancetype)responseFromFileAtURL:(NSURL *)url;
 - (BOOL)matchesURL:(NSURL *)URL method:(NSString *)method patternLength:(NSUInteger *)patternLength;
@@ -19,6 +19,8 @@ FOUNDATION_EXPORT NSString * const MocktailFileExtension;
 @property (nonatomic, readonly) NSDictionary *headers;
 @property (nonatomic, readonly) NSInteger statusCode;
 @property (nonatomic, readonly) NSData *body;
+
 - (NSData *)bodyWithValues:(NSDictionary *)values;
+- (NSDictionary *)headersWithValues:(NSDictionary *)values;
 
 @end

@@ -1,5 +1,5 @@
 #include "Pods-AMYServer Tests-GRMustache.xcconfig"
 GCC_PREPROCESSOR_DEFINITIONS = COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/GRMustache" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/GRMustache" "${PODS_ROOT}/Headers/JRSwizzle" "${PODS_ROOT}/Headers/KIF-next" "${PODS_ROOT}/Headers/Mocktail"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/GRMustache" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/GRMustache" "${PODS_ROOT}/Headers/JRSwizzle" "${PODS_ROOT}/Headers/KIF-next"
 OTHER_LDFLAGS = -ObjC ${PODS_AMYSERVER_TESTS_GRMUSTACHE_OTHER_LDFLAGS}
 PODS_ROOT = ${SRCROOT}

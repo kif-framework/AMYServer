@@ -9,12 +9,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MocktailResponse.h"
+#import "_AMYMocktailResponse.h"
 #import <GRMustache.h>
 
-NSString * const MocktailFileExtension = @"tail";
+NSString * const _AMYMocktailFileExtension = @"tail";
 
-@interface MocktailResponse ()
+@interface _AMYMocktailResponse ()
 @property (nonatomic, strong) NSRegularExpression *methodRegex;
 @property (nonatomic, strong) NSRegularExpression *absoluteURLRegex;
 @property (nonatomic, strong) NSURL *fileURL;
@@ -23,7 +23,7 @@ NSString * const MocktailFileExtension = @"tail";
 @property (nonatomic, assign) NSUInteger bodyOffset;
 @end
 
-@implementation MocktailResponse
+@implementation _AMYMocktailResponse
 
 + (instancetype)responseFromFileAtURL:(NSURL *)url;
 {
@@ -45,12 +45,27 @@ NSString * const MocktailFileExtension = @"tail";
         NSLog(@"Invalid amount of lines: %u", (unsigned)[lines count]);
         return nil;
     }
-
-    MocktailResponse *response = [[self alloc] init];
+    
+    _AMYMocktailResponse *response = [[self alloc] init];
     response.methodRegex = [NSRegularExpression regularExpressionWithPattern:lines[0] options:NSRegularExpressionCaseInsensitive error:nil];
     response.absoluteURLRegex = [NSRegularExpression regularExpressionWithPattern:lines[1] options:NSRegularExpressionCaseInsensitive error:nil];
     response.statusCode = [lines[2] integerValue];
-    response.headers = @{@"Content-Type":lines[3]};
+    NSMutableDictionary *headers = @{@"Content-Type":lines[3]}.mutableCopy;
+    
+    // From line 5 to '\n\n', expect HTTP response headers.
+    NSRegularExpression *headerPattern = [NSRegularExpression regularExpressionWithPattern:@"^([^:]+):\\s+(.*)" options:0 error:NULL];
+    for (NSUInteger line = 4; line < lines.count; line ++) {
+        NSString *headerLine = lines[line];
+        NSTextCheckingResult *match = [headerPattern firstMatchInString:headerLine options:0 range:NSMakeRange(0, headerLine.length)];
+        
+        if (match) {
+            NSString *key = [headerLine substringWithRange:[match rangeAtIndex:1]];
+            NSString *value = [headerLine substringWithRange:[match rangeAtIndex:2]];
+            headers[key] = value;
+        }
+    }
+    
+    response.headers = headers.copy;
     response.fileURL = url;
     response.bodyOffset = [headerMatter dataUsingEncoding:originalEncoding].length + 2;
     return response;
@@ -70,6 +85,16 @@ NSString * const MocktailFileExtension = @"tail";
     }
 
     return NO;
+}
+
+- (NSDictionary *)headersWithValues:(NSDictionary *)values
+{
+    NSMutableDictionary *headers = [NSMutableDictionary dictionary];
+    [self.headers enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        NSString *transformedObj = [GRMustacheTemplate renderObject:values fromString:obj error:NULL];
+        headers[key] = transformedObj ?: obj;
+    }];
+    return headers.copy;
 }
 
 - (NSData *)bodyWithValues:(NSDictionary *)values;

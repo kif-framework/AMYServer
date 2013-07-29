@@ -44,6 +44,8 @@
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         
+        NSLog(@"Headers: %@", [(NSHTTPURLResponse *)response allHeaderFields]);
+        
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
         
         [[[UIAlertView alloc] initWithTitle:result[@"message"] message:nil delegate:nil cancelButtonTitle:@"Close" otherButtonTitles:nil] show];

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		5641C68D282B4F7C8E987DB7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C65A889641443929FA2D0A6 /* libPods.a */; };
 		D8941B57AA6B462F808362B6 /* libPods-AMYServer Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFA695D96E74AD0B14ECB01 /* libPods-AMYServer Tests.a */; };
+		EB283E3B17A6317000883DEC /* _AMYMocktailResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = EB283E3A17A6317000883DEC /* _AMYMocktailResponse.m */; };
+		EB283E3C17A6317000883DEC /* _AMYMocktailResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = EB283E3A17A6317000883DEC /* _AMYMocktailResponse.m */; };
 		EB9713EA17961CD20005E31E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB9713E917961CD20005E31E /* Foundation.framework */; };
 		EB9713EF17961CD20005E31E /* AMYServer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = EB9713EE17961CD20005E31E /* AMYServer.h */; };
 		EB9713F117961CD20005E31E /* AMYServer.m in Sources */ = {isa = PBXBuildFile; fileRef = EB9713F017961CD20005E31E /* AMYServer.m */; };
@@ -65,6 +67,8 @@
 		2CFA695D96E74AD0B14ECB01 /* libPods-AMYServer Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AMYServer Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		660DAD8CDF4041B6ADB992C7 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		7C65A889641443929FA2D0A6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB283E3917A6317000883DEC /* _AMYMocktailResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _AMYMocktailResponse.h; sourceTree = "<group>"; };
+		EB283E3A17A6317000883DEC /* _AMYMocktailResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _AMYMocktailResponse.m; sourceTree = "<group>"; };
 		EB9713E617961CD20005E31E /* libAMYServer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAMYServer.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB9713E917961CD20005E31E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EB9713ED17961CD20005E31E /* AMYServer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMYServer-Prefix.pch"; sourceTree = "<group>"; };
@@ -179,6 +183,8 @@
 				EB97143617965CC70005E31E /* AMYRequest.m */,
 				EB971438179660B10005E31E /* _AMYURLProtocol.h */,
 				EB971439179660B10005E31E /* _AMYURLProtocol.m */,
+				EB283E3917A6317000883DEC /* _AMYMocktailResponse.h */,
+				EB283E3A17A6317000883DEC /* _AMYMocktailResponse.m */,
 				EB9713EC17961CD20005E31E /* Supporting Files */,
 			);
 			path = AMYServer;
@@ -434,6 +440,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB283E3B17A6317000883DEC /* _AMYMocktailResponse.m in Sources */,
 				EB9713F117961CD20005E31E /* AMYServer.m in Sources */,
 				EB97143717965CC70005E31E /* AMYRequest.m in Sources */,
 				EB97143A179660B10005E31E /* _AMYURLProtocol.m in Sources */,
@@ -454,6 +461,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB283E3C17A6317000883DEC /* _AMYMocktailResponse.m in Sources */,
 				EB97143D17966E740005E31E /* AMYServerTests.m in Sources */,
 				EB97143F1796706D0005E31E /* AMYServer.m in Sources */,
 				EB9714401796706D0005E31E /* AMYRequest.m in Sources */,

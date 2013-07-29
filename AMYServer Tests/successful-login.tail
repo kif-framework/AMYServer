@@ -2,6 +2,7 @@ POST
 login.json
 200
 application/json
+X-Application-Token: {{{token}}}
 
 {
     "success": true,
