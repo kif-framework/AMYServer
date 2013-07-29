@@ -23,7 +23,7 @@
 // This library does not follow semantic-versioning,
 // so we were not able to define version macros.
 // Please contact the author.
-// Version: 2.0.0pre2.
+// Version: 2.0.0pre3.
 
 // Mocktail
 #define COCOAPODS_POD_AVAILABLE_Mocktail
