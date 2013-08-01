@@ -186,7 +186,17 @@ In this case, AMYServer will ignore requests that don't have the correct usernam
 
 Here, AMYServer injects a custom header with the token.
 
-Example 3: Custom Behavior
+Example 3: Default Mustache values
+----------------------------------
+
+Rather than providing every value every time you render a template, AMYServer lets your provide a JSON file with default values.  The name of this file is the same as the tail file with an additional extension `.defaults.json`.
+
+**successful-login.tail.defaults.json**
+
+    { "message": "Good morning, sir", "token": "1234" }
+
+
+Example 4: Custom Behavior
 --------------------------
 
 AMYServer is not limited to just Mocktails.  It can be use for serving images, 1000 bytes at a time, with 5 seconds between bytes.
