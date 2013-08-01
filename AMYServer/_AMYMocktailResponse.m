@@ -21,19 +21,29 @@ NSString * const _AMYMocktailFileExtension = @"tail";
 @property (nonatomic, strong) NSDictionary *headers;
 @property (nonatomic, assign) NSInteger statusCode;
 @property (nonatomic, assign) NSUInteger bodyOffset;
+@property (nonatomic, strong) NSDictionary *defaultValues;
 @end
 
 @implementation _AMYMocktailResponse
 
-+ (instancetype)responseFromFileAtURL:(NSURL *)url;
++ (instancetype)responseFromTail:(NSString *)tail bundle:(NSBundle *)bundle error:(NSError **)error
 {
-    NSAssert(url, @"Expected valid URL.");
+    NSURL *mocktailURL = [(bundle ?: [NSBundle mainBundle]) URLForResource:tail withExtension:_AMYMocktailFileExtension];
+    return [self responseFromFileAtURL:mocktailURL error:error];
+}
 
-    NSError *error = nil;
++ (instancetype)responseFromFileAtURL:(NSURL *)url error:(NSError **)error;
+{
+    if (!url) {
+        if (error) {
+            *error = [NSError errorWithDomain:@"Mocktail" code:0 userInfo:@{NSLocalizedDescriptionKey:@"Mocktail URL cannot be nil."}];
+        }
+        return nil;
+    }
+
     NSStringEncoding originalEncoding;
-    NSString *contentsOfFile = [NSString stringWithContentsOfURL:url usedEncoding:&originalEncoding error:&error];
-    if (error) {
-        NSLog(@"Error opening %@: %@", url, error);
+    NSString *contentsOfFile = [NSString stringWithContentsOfURL:url usedEncoding:&originalEncoding error:error];
+    if (!contentsOfFile) {
         return nil;
     }
 
@@ -42,7 +52,9 @@ NSString * const _AMYMocktailFileExtension = @"tail";
     [scanner scanUpToString:@"\n\n" intoString:&headerMatter];
     NSArray *lines = [headerMatter componentsSeparatedByString:@"\n"];
     if ([lines count] < 4) {
-        NSLog(@"Invalid amount of lines: %u", (unsigned)[lines count]);
+        if (error) {
+            *error = [NSError errorWithDomain:@"Mocktail" code:0 userInfo:@{NSLocalizedDescriptionKey:[NSString stringWithFormat:@"Invalid amount of lines: %u", (unsigned)[lines count]]}];
+        }
         return nil;
     }
     
@@ -62,6 +74,11 @@ NSString * const _AMYMocktailFileExtension = @"tail";
             NSString *key = [headerLine substringWithRange:[match rangeAtIndex:1]];
             NSString *value = [headerLine substringWithRange:[match rangeAtIndex:2]];
             headers[key] = value;
+        } else {
+            if (error) {
+                *error = [NSError errorWithDomain:@"Mocktail" code:0 userInfo:@{NSLocalizedDescriptionKey:[NSString stringWithFormat:@"Invalid header line: %@", headerLine]}];
+            }
+            return nil;
         }
     }
     
@@ -87,28 +104,80 @@ NSString * const _AMYMocktailFileExtension = @"tail";
     return NO;
 }
 
-- (NSDictionary *)headersWithValues:(NSDictionary *)values
+- (NSDictionary *)defaultValuesWithError:(NSError **)error;
 {
+    if (self.defaultValues) {
+        return self.defaultValues;
+    }
+        
+    NSURL *defaultValuesURL = [self.fileURL URLByAppendingPathExtension:@"defaults.json"];
+    NSData *JSONData = [NSData dataWithContentsOfURL:defaultValuesURL];
+    
+    if (!JSONData) {
+        self.defaultValues = @{};
+        return self.defaultValues;
+    }
+    
+    self.defaultValues = [NSJSONSerialization JSONObjectWithData:JSONData options:0 error:error];
+    return self.defaultValues;
+}
+
+NSDictionary *_mocktailMergedDictionary(NSDictionary *dest, NSDictionary *src)
+{
+    NSMutableDictionary *result = dest.mutableCopy;
+    
+    [src enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        
+        id destObj = dest[key];
+        
+        if (!destObj) {
+            result[key] = obj;
+        } else if ([obj isKindOfClass:[NSDictionary class]]) {
+            result[key] = _mocktailMergedDictionary(destObj, src);
+        } else if ([obj isKindOfClass:[NSArray class]] && [(NSArray *)obj count]) {
+            NSMutableArray *items = @[].mutableCopy;
+            for (NSDictionary *item in destObj) {
+                [items addObject:_mocktailMergedDictionary(item, obj[0])];
+            }
+        }
+    }];
+    
+    return result.copy;
+}
+
+
+- (NSDictionary *)headersWithValues:(NSDictionary *)values error:(NSError **)error;
+{
+    NSDictionary *defaultValues = [self defaultValuesWithError:error];
+    if (!defaultValues) {
+        return nil;
+    }
+    values = _mocktailMergedDictionary(values ?: @{}, defaultValues);
+    
     NSMutableDictionary *headers = [NSMutableDictionary dictionary];
     [self.headers enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        NSString *transformedObj = [GRMustacheTemplate renderObject:values fromString:obj error:NULL];
+        NSString *transformedObj = [GRMustacheTemplate renderObject:values fromString:obj error:error];
         headers[key] = transformedObj ?: obj;
     }];
     return headers.copy;
 }
 
-- (NSData *)bodyWithValues:(NSDictionary *)values;
+- (NSData *)bodyWithValues:(NSDictionary *)values error:(NSError **)error;
 {
+    NSDictionary *defaultValues = [self defaultValuesWithError:error];
+    if (!defaultValues) {
+        return nil;
+    }
+    values = _mocktailMergedDictionary(values ?: @{}, defaultValues);
+    
     NSData *body = [NSData dataWithContentsOfURL:self.fileURL];
     body = [body subdataWithRange:NSMakeRange(self.bodyOffset, body.length - self.bodyOffset)];
 
     // Replace placeholders with values. We transform the body data into a string for easier search and replace.
     if ([values count] > 0) {
         NSString *bodyString = [[NSString alloc] initWithData:body encoding:NSUTF8StringEncoding];
-        NSError *error = nil;
-        NSString *renderedBodyString = [GRMustacheTemplate renderObject:values fromString:bodyString error:&error];
+        NSString *renderedBodyString = [GRMustacheTemplate renderObject:values fromString:bodyString error:error];
         if (!renderedBodyString) {
-            NSLog(@"Render failed, error: %@", error);
             return nil;
         }
         body = [renderedBodyString dataUsingEncoding:NSUTF8StringEncoding];
@@ -123,7 +192,7 @@ NSString * const _AMYMocktailFileExtension = @"tail";
 
 - (NSData *)body;
 {
-    return [self bodyWithValues:nil];
+    return [self bodyWithValues:nil error:NULL];
 }
 
 - (NSData *)dataByDecodingBase64Data:(NSData *)encodedData;

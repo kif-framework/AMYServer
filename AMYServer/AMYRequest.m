@@ -25,7 +25,7 @@
     return _protocol.request;
 }
 
-- (void)respondWithSatusCode:(NSInteger)statusCode HTTPVersion:(NSString *)HTTPVersion headerFields:(NSDictionary *)headerFields cacheStoragePolicy:(NSURLCacheStoragePolicy)cacheStoragePolicy
+- (void)respondWithStatusCode:(NSInteger)statusCode HTTPVersion:(NSString *)HTTPVersion headerFields:(NSDictionary *)headerFields cacheStoragePolicy:(NSURLCacheStoragePolicy)cacheStoragePolicy
 {
     if ([_protocol canRespond]) {
         NSHTTPURLResponse *response = [[NSHTTPURLResponse alloc] initWithURL:self.URLRequest.URL statusCode:statusCode HTTPVersion:HTTPVersion headerFields:headerFields];
@@ -33,9 +33,9 @@
     }
 }
 
-- (void)respondWithSatusCode:(NSInteger)statusCode headerFields:(NSDictionary *)headerFields
+- (void)respondWithStatusCode:(NSInteger)statusCode headerFields:(NSDictionary *)headerFields
 {
-    [self respondWithSatusCode:statusCode HTTPVersion:@"1.1" headerFields:headerFields cacheStoragePolicy:NSURLCacheStorageAllowedInMemoryOnly];
+    [self respondWithStatusCode:statusCode HTTPVersion:@"1.1" headerFields:headerFields cacheStoragePolicy:NSURLCacheStorageAllowedInMemoryOnly];
 }
 
 - (void)sendData:(NSData *)data

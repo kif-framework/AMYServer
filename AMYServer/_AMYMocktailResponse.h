@@ -13,14 +13,16 @@ FOUNDATION_EXPORT NSString * const _AMYMocktailFileExtension;
 
 @interface _AMYMocktailResponse : NSObject
 
-+ (instancetype)responseFromFileAtURL:(NSURL *)url;
++ (instancetype)responseFromTail:(NSString *)tail bundle:(NSBundle *)bundle error:(NSError **)error;
++ (instancetype)responseFromFileAtURL:(NSURL *)url error:(NSError **)error;
+
 - (BOOL)matchesURL:(NSURL *)URL method:(NSString *)method patternLength:(NSUInteger *)patternLength;
 
 @property (nonatomic, readonly) NSDictionary *headers;
 @property (nonatomic, readonly) NSInteger statusCode;
 @property (nonatomic, readonly) NSData *body;
 
-- (NSData *)bodyWithValues:(NSDictionary *)values;
-- (NSDictionary *)headersWithValues:(NSDictionary *)values;
+- (NSData *)bodyWithValues:(NSDictionary *)values error:(NSError **)error;
+- (NSDictionary *)headersWithValues:(NSDictionary *)values error:(NSError **)error;
 
 @end

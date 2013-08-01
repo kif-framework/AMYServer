@@ -46,7 +46,7 @@ static inline NSString *pendingRequests(ExampleServer *server) {
     
     id response = @{@"success": @(success), @"message": message ?: @"", @"token" : token ?: @""};
     
-    [request respondWithSatusCode:200 headerFields:@{@"X-Application-Token": response[@"token"]}];
+    [request respondWithStatusCode:200 headerFields:@{@"X-Application-Token": response[@"token"]}];
     [request sendData:[NSJSONSerialization dataWithJSONObject:response options:0 error:NULL]];
     [request close];
 }

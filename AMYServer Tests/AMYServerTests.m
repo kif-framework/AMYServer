@@ -51,11 +51,39 @@
     KIFExpectFailure([exampleServer waitForRequestMatchingMocktail:@"logon" andRespondWithValues:@{}]);
 }
 
+- (void)testMocktailWithBadMustache
+{
+    KIFExpectFailure([exampleServer waitForRequestMatchingMocktail:@"bad-mustache" andRespondWithValues:@{@"message": @"hello"}]);
+}
+
+- (void)testMocktailWithNotEnoughLines
+{
+    KIFExpectFailure([exampleServer waitForRequestMatchingMocktail:@"not-enough-lines" andRespondWithValues:@{@"message": @"hello"}]);
+}
+
+- (void)testMocktailWithBadJSON
+{
+    KIFExpectFailure([exampleServer waitForRequestMatchingMocktail:@"bad-json" andRespondWithValues:@{@"message": @"hello"}]);
+}
+
+- (void)testMocktailWithInvalidHeader
+{
+    ([exampleServer waitForRequestMatchingMocktail:@"invalid-header" andRespondWithValues:@{@"message": @"hello"}]);
+}
+
 - (void)testBasicMocktail
 {
     [exampleServer waitForRequestMatchingMocktail:@"successful-login" andRespondWithValues:@{@"token": @"1234", @"message": @"Yo, Brian"}];
     
     [tester waitForViewWithAccessibilityLabel:@"Yo, Brian"];
+    [tester tapViewWithAccessibilityLabel:@"Close"];
+}
+
+- (void)testMocktailWithDefaults
+{
+    [exampleServer waitForRequestMatchingMocktail:@"successful-login" andRespondWithValues:@{@"token": @"1234"}];
+    
+    [tester waitForViewWithAccessibilityLabel:@"Good morning, Sir"];
     [tester tapViewWithAccessibilityLabel:@"Close"];
 }
 

@@ -17,8 +17,8 @@
 @property (nonatomic, readonly) NSURLRequest *URLRequest;
 @property (nonatomic, readonly) _AMYURLProtocol *protocol;
 
-- (void)respondWithSatusCode:(NSInteger) statusCode HTTPVersion:(NSString *)HTTPVersion headerFields:(NSDictionary *)headerFields cacheStoragePolicy:(NSURLCacheStoragePolicy)cacheStoragePolicy;
-- (void)respondWithSatusCode:(NSInteger) statusCode headerFields:(NSDictionary *)headerFields;
+- (void)respondWithStatusCode:(NSInteger) statusCode HTTPVersion:(NSString *)HTTPVersion headerFields:(NSDictionary *)headerFields cacheStoragePolicy:(NSURLCacheStoragePolicy)cacheStoragePolicy;
+- (void)respondWithStatusCode:(NSInteger) statusCode headerFields:(NSDictionary *)headerFields;
 
 - (void)sendData:(NSData *)data;
 
