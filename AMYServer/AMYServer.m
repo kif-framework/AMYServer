@@ -64,7 +64,7 @@
     _AMYMocktailResponse *response = [_AMYMocktailResponse responseFromTail:mocktail bundle:[NSBundle KIFTestBundle] error:&error];
     
     if (error) {
-        [self failWithError:[NSError KIFErrorWithCode:KIFTestStepResultFailure underlyingError:error localizedDescriptionWithFormat:@"Failed to load mocktail: %@", error.localizedDescription] stopTest:YES];
+        [self failWithError:[NSError KIFErrorWithUnderlyingError:error format:@"Failed to load mocktail: %@", error.localizedDescription] stopTest:YES];
     }
     
     AMYRequest *request = [self waitForRequestMatchingBlock:^KIFTestStepResult(NSURLRequest *request, NSError *__autoreleasing *error) {
@@ -80,12 +80,12 @@
     
     NSDictionary *headers = [response headersWithValues:values error:&error];
     if (error) {
-        [self failWithError:[NSError KIFErrorWithCode:KIFTestStepResultFailure underlyingError:error localizedDescriptionWithFormat:@"Failed to generate headers: %@", error.localizedDescription] stopTest:YES];
+        [self failWithError:[NSError KIFErrorWithUnderlyingError:error format:@"Failed to generate headers: %@", error.localizedDescription] stopTest:YES];
     }
     
     NSData *body = [response bodyWithValues:values error:&error];
     if (error) {
-        [self failWithError:[NSError KIFErrorWithCode:KIFTestStepResultFailure underlyingError:error localizedDescriptionWithFormat:@"Failed to generate body: %@", error.localizedDescription] stopTest:YES];
+        [self failWithError:[NSError KIFErrorWithUnderlyingError:error format:@"Failed to generate body: %@", error.localizedDescription] stopTest:YES];
     }
     
     [request respondWithStatusCode:response.statusCode headerFields:headers];

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5641C68D282B4F7C8E987DB7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C65A889641443929FA2D0A6 /* libPods.a */; };
 		D8941B57AA6B462F808362B6 /* libPods-AMYServer Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFA695D96E74AD0B14ECB01 /* libPods-AMYServer Tests.a */; };
+		EB1D09D417AA2E7B003D3333 /* invalid-header.tail in Resources */ = {isa = PBXBuildFile; fileRef = EB3F654317A9E5DC00469D18 /* invalid-header.tail */; };
 		EB283E3B17A6317000883DEC /* _AMYMocktailResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = EB283E3A17A6317000883DEC /* _AMYMocktailResponse.m */; };
 		EB283E3C17A6317000883DEC /* _AMYMocktailResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = EB283E3A17A6317000883DEC /* _AMYMocktailResponse.m */; };
 		EB3F653A17A9B10B00469D18 /* successful-login.tail.defaults.json in Resources */ = {isa = PBXBuildFile; fileRef = EB3F653917A9AFD700469D18 /* successful-login.tail.defaults.json */; };
@@ -369,6 +370,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB1D09D417AA2E7B003D3333 /* invalid-header.tail in Resources */,
 				EB3F653C17A9B16200469D18 /* bad-mustache.tail in Resources */,
 				EB97142B179657770005E31E /* InfoPlist.strings in Resources */,
 				EB3F653E17A9E4AE00469D18 /* not-enough-lines.tail in Resources */,

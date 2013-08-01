@@ -68,7 +68,7 @@
 
 - (void)testMocktailWithInvalidHeader
 {
-    ([exampleServer waitForRequestMatchingMocktail:@"invalid-header" andRespondWithValues:@{@"message": @"hello"}]);
+    KIFExpectFailure([exampleServer waitForRequestMatchingMocktail:@"invalid-header" andRespondWithValues:@{@"message": @"hello"}]);
 }
 
 - (void)testBasicMocktail
