@@ -1,0 +1,10 @@
+.*
+.*
+200
+text/xml
+
+<items description="{{a.b.c}}">
+    {{#items}}
+    <item key="{{key}}">{{value}}</item>
+    {{/items}}
+</items>

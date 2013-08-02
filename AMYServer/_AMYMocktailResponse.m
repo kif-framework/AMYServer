@@ -133,12 +133,13 @@ NSDictionary *_mocktailMergedDictionary(NSDictionary *dest, NSDictionary *src)
         if (!destObj) {
             result[key] = obj;
         } else if ([obj isKindOfClass:[NSDictionary class]]) {
-            result[key] = _mocktailMergedDictionary(destObj, src);
+            result[key] = _mocktailMergedDictionary(destObj, obj);
         } else if ([obj isKindOfClass:[NSArray class]] && [(NSArray *)obj count]) {
             NSMutableArray *items = @[].mutableCopy;
             for (NSDictionary *item in destObj) {
                 [items addObject:_mocktailMergedDictionary(item, obj[0])];
             }
+            result[key] = items;
         }
     }];
     

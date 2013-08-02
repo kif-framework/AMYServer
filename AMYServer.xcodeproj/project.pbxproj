@@ -10,6 +10,9 @@
 		5641C68D282B4F7C8E987DB7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C65A889641443929FA2D0A6 /* libPods.a */; };
 		D8941B57AA6B462F808362B6 /* libPods-AMYServer Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CFA695D96E74AD0B14ECB01 /* libPods-AMYServer Tests.a */; };
 		EB1D09D417AA2E7B003D3333 /* invalid-header.tail in Resources */ = {isa = PBXBuildFile; fileRef = EB3F654317A9E5DC00469D18 /* invalid-header.tail */; };
+		EB23AA7317AB61F1002B6399 /* AMYMocktailResponseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB23AA7217AB61F1002B6399 /* AMYMocktailResponseTests.m */; };
+		EB23AA7517AB6229002B6399 /* xml.tail in Resources */ = {isa = PBXBuildFile; fileRef = EB23AA7417AB6229002B6399 /* xml.tail */; };
+		EB23AA7717AB62D9002B6399 /* xml.tail.defaults.json in Resources */ = {isa = PBXBuildFile; fileRef = EB23AA7617AB62D9002B6399 /* xml.tail.defaults.json */; };
 		EB283E3B17A6317000883DEC /* _AMYMocktailResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = EB283E3A17A6317000883DEC /* _AMYMocktailResponse.m */; };
 		EB283E3C17A6317000883DEC /* _AMYMocktailResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = EB283E3A17A6317000883DEC /* _AMYMocktailResponse.m */; };
 		EB3F653A17A9B10B00469D18 /* successful-login.tail.defaults.json in Resources */ = {isa = PBXBuildFile; fileRef = EB3F653917A9AFD700469D18 /* successful-login.tail.defaults.json */; };
@@ -73,6 +76,9 @@
 		2CFA695D96E74AD0B14ECB01 /* libPods-AMYServer Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AMYServer Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		660DAD8CDF4041B6ADB992C7 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		7C65A889641443929FA2D0A6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB23AA7217AB61F1002B6399 /* AMYMocktailResponseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMYMocktailResponseTests.m; sourceTree = "<group>"; };
+		EB23AA7417AB6229002B6399 /* xml.tail */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = xml.tail; sourceTree = "<group>"; };
+		EB23AA7617AB62D9002B6399 /* xml.tail.defaults.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = xml.tail.defaults.json; sourceTree = "<group>"; };
 		EB283E3917A6317000883DEC /* _AMYMocktailResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _AMYMocktailResponse.h; sourceTree = "<group>"; };
 		EB283E3A17A6317000883DEC /* _AMYMocktailResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _AMYMocktailResponse.m; sourceTree = "<group>"; };
 		EB3F653917A9AFD700469D18 /* successful-login.tail.defaults.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "successful-login.tail.defaults.json"; sourceTree = "<group>"; };
@@ -244,6 +250,7 @@
 				EB971442179BAD210005E31E /* ExampleServer.h */,
 				EB971443179BAD210005E31E /* ExampleServer.m */,
 				EB97143C17966E740005E31E /* AMYServerTests.m */,
+				EB23AA7217AB61F1002B6399 /* AMYMocktailResponseTests.m */,
 				EBAE488317A46C680005EE19 /* successful-login.tail */,
 				EB3F653917A9AFD700469D18 /* successful-login.tail.defaults.json */,
 				EB3F653B17A9B16200469D18 /* bad-mustache.tail */,
@@ -251,6 +258,8 @@
 				EB3F654317A9E5DC00469D18 /* invalid-header.tail */,
 				EB3F653F17A9E4D400469D18 /* bad-json.tail */,
 				EB3F654117A9E4E300469D18 /* bad-json.tail.defaults.json */,
+				EB23AA7417AB6229002B6399 /* xml.tail */,
+				EB23AA7617AB62D9002B6399 /* xml.tail.defaults.json */,
 			);
 			path = "AMYServer Tests";
 			sourceTree = "<group>";
@@ -373,11 +382,13 @@
 				EB1D09D417AA2E7B003D3333 /* invalid-header.tail in Resources */,
 				EB3F653C17A9B16200469D18 /* bad-mustache.tail in Resources */,
 				EB97142B179657770005E31E /* InfoPlist.strings in Resources */,
+				EB23AA7717AB62D9002B6399 /* xml.tail.defaults.json in Resources */,
 				EB3F653E17A9E4AE00469D18 /* not-enough-lines.tail in Resources */,
 				EB3F653A17A9B10B00469D18 /* successful-login.tail.defaults.json in Resources */,
 				EBAE488417A46C680005EE19 /* successful-login.tail in Resources */,
 				EB3F654017A9E4D400469D18 /* bad-json.tail in Resources */,
 				EB3F654217A9E4E300469D18 /* bad-json.tail.defaults.json in Resources */,
+				EB23AA7517AB6229002B6399 /* xml.tail in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +500,7 @@
 				EB97143D17966E740005E31E /* AMYServerTests.m in Sources */,
 				EB97143F1796706D0005E31E /* AMYServer.m in Sources */,
 				EB9714401796706D0005E31E /* AMYRequest.m in Sources */,
+				EB23AA7317AB61F1002B6399 /* AMYMocktailResponseTests.m in Sources */,
 				EB9714411796706D0005E31E /* _AMYURLProtocol.m in Sources */,
 				EB971444179BAD210005E31E /* ExampleServer.m in Sources */,
 			);
