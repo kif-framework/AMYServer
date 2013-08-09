@@ -33,7 +33,13 @@
 
 - (void)stop
 {
+    [self closeAllRequests];
     [_AMYURLProtocol stopMonitoringURL:self.baseURL];
+}
+
+- (void)closeAllRequests
+{
+    [_AMYURLProtocol closeAllRequestsWithBaseURL:self.baseURL];
 }
 
 - (AMYRequest *)waitForRequestMatchingBlock:(KIFTestStepResult (^)(NSURLRequest *, NSError **))block
@@ -67,6 +73,16 @@
         [self failWithError:[NSError KIFErrorWithUnderlyingError:error format:@"Failed to load mocktail: %@", error.localizedDescription] stopTest:YES];
     }
     
+    NSDictionary *headers = [response headersWithValues:values error:&error];
+    if (error) {
+        [self failWithError:[NSError KIFErrorWithUnderlyingError:error format:@"Failed to generate headers: %@", error.localizedDescription] stopTest:YES];
+    }
+    
+    NSData *body = [response bodyWithValues:values error:&error];
+    if (error) {
+        [self failWithError:[NSError KIFErrorWithUnderlyingError:error format:@"Failed to generate body: %@", error.localizedDescription] stopTest:YES];
+    }
+    
     AMYRequest *request = [self waitForRequestMatchingBlock:^KIFTestStepResult(NSURLRequest *request, NSError *__autoreleasing *error) {
         
         KIFTestWaitCondition([response matchesURL:request.URL method:request.HTTPMethod patternLength:NULL], error, @"Could not find request matching mocktail.");
@@ -77,16 +93,6 @@
         
         return KIFTestStepResultSuccess;
     }];
-    
-    NSDictionary *headers = [response headersWithValues:values error:&error];
-    if (error) {
-        [self failWithError:[NSError KIFErrorWithUnderlyingError:error format:@"Failed to generate headers: %@", error.localizedDescription] stopTest:YES];
-    }
-    
-    NSData *body = [response bodyWithValues:values error:&error];
-    if (error) {
-        [self failWithError:[NSError KIFErrorWithUnderlyingError:error format:@"Failed to generate body: %@", error.localizedDescription] stopTest:YES];
-    }
     
     [request respondWithStatusCode:response.statusCode headerFields:headers];
     [request sendData:body];

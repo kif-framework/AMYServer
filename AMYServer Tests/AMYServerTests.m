@@ -46,29 +46,62 @@
     [tester tapViewWithAccessibilityLabel:@"Close"];
 }
 
+
+- (void)testThatRequestsCloseWithAnErrorStatus
+{
+    [exampleServer closeAllRequests];
+    [tester waitForViewWithAccessibilityLabel:@"500 status code"];
+    [tester tapViewWithAccessibilityLabel:@"Close"];
+}
+
+- (void)testThatClosingAllRequestsClosesAllRequests
+{
+    [exampleServer closeAllRequests];
+    KIFExpectFailure([[exampleServer usingTimeout:0.5] waitForLoginWithUsername:@"brian" password:@"$ecret" andRespondWithSuccess:YES message:@"Welcome, Brian" token:@"12345"]);
+    [tester tapViewWithAccessibilityLabel:@"Close"];
+}
+
+- (void)testThatStoppingTheServerClosesAllRequests
+{
+    [exampleServer stop];
+    [exampleServer start];
+    KIFExpectFailure([[exampleServer usingTimeout:0.5] waitForLoginWithUsername:@"brian" password:@"$ecret" andRespondWithSuccess:YES message:@"Welcome, Brian" token:@"12345"]);
+    [tester tapViewWithAccessibilityLabel:@"Close"];
+}
+
 - (void)testMissingMocktail
 {
     KIFExpectFailure([exampleServer waitForRequestMatchingMocktail:@"logon" andRespondWithValues:@{}]);
+    [exampleServer closeAllRequests];
+    [tester tapViewWithAccessibilityLabel:@"Close"];
 }
 
 - (void)testMocktailWithBadMustache
 {
     KIFExpectFailure([exampleServer waitForRequestMatchingMocktail:@"bad-mustache" andRespondWithValues:@{@"message": @"hello"}]);
+    [exampleServer closeAllRequests];
+    [tester tapViewWithAccessibilityLabel:@"Close"];
 }
 
 - (void)testMocktailWithNotEnoughLines
 {
     KIFExpectFailure([exampleServer waitForRequestMatchingMocktail:@"not-enough-lines" andRespondWithValues:@{@"message": @"hello"}]);
+    [exampleServer closeAllRequests];
+    [tester tapViewWithAccessibilityLabel:@"Close"];
 }
 
 - (void)testMocktailWithBadJSON
 {
     KIFExpectFailure([exampleServer waitForRequestMatchingMocktail:@"bad-json" andRespondWithValues:@{@"message": @"hello"}]);
+    [exampleServer closeAllRequests];
+    [tester tapViewWithAccessibilityLabel:@"Close"];
 }
 
 - (void)testMocktailWithInvalidHeader
 {
     KIFExpectFailure([exampleServer waitForRequestMatchingMocktail:@"invalid-header" andRespondWithValues:@{@"message": @"hello"}]);
+    [exampleServer closeAllRequests];
+    [tester tapViewWithAccessibilityLabel:@"Close"];
 }
 
 - (void)testBasicMocktail
@@ -107,7 +140,8 @@
         KIFTestWaitCondition([json[@"username"] isEqualToString:@"joe"], error, @"Could not find username");
         return KIFTestStepResultSuccess;
     } andRespondWithValues:@{}]);
+    [exampleServer closeAllRequests];
+    [tester tapViewWithAccessibilityLabel:@"Close"];
 }
-
 
 @end

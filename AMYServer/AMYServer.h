@@ -20,5 +20,6 @@
 
 - (void)start;
 - (void)stop;
+- (void)closeAllRequests;
 
 @end

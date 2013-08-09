@@ -70,11 +70,16 @@
     [[self pendingRequests] addObject:protocol];
 }
 
++ (AMYRequest *)findAndRemoveAnyRequestMatchingBaseURL:(NSURL *)baseURL
+{
+    return [self findAndRemoveRequestMatchingBaseURL:baseURL block:nil error:NULL];
+}
+
 + (AMYRequest *)findAndRemoveRequestMatchingBaseURL:(NSURL *)baseURL block:(KIFTestStepResult (^)(NSURLRequest *URLRequest, NSError **error))block error:(NSError **)error
 {
     AMYAssertMainThread();
     for (_AMYURLProtocol *protocol in [self pendingRequests]) {
-        if ([baseURL isEqual:[self baseURLForRequest:protocol.request]] && protocol.canRespond && block(protocol.request, error) == KIFTestStepResultSuccess) {
+        if ([baseURL isEqual:[self baseURLForRequest:protocol.request]] && protocol.canRespond && (!block || block(protocol.request, error) == KIFTestStepResultSuccess)) {
             
             AMYRequest *request = [[AMYRequest alloc] initWithProtocol:protocol];
             [[self pendingRequests] removeObject:protocol];
@@ -116,6 +121,16 @@
     
     if (![self URLs].count) {
         [self unregisterClass:self];
+    }
+}
+
++ (void)closeAllRequestsWithBaseURL:(NSURL *)URL
+{
+    AMYAssertMainThread();
+    AMYRequest *request;
+    while ((request = [self findAndRemoveAnyRequestMatchingBaseURL:URL])) {
+        [request respondWithStatusCode:500 headerFields:nil];
+        [request close];
     }
 }
 
