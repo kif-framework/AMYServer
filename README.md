@@ -1,7 +1,7 @@
-AMYServer KIF-next Test Actors
+AMYServer KIF Test Actors
 =====================================
 
-AMYServer, which stands for AMY Mocks Your Server, provides a mechanism for mocking your web servers within a KIF-next test case.
+AMYServer, which stands for AMY Mocks Your Server, provides a mechanism for mocking your web servers within a KIF test case.
 
 **How does it compare to something like Mocktail?** Mocktail is useful for taking the server out of the equation when doing development but has some limitations which may impact testing.
 
@@ -11,17 +11,17 @@ AMYServer, which stands for AMY Mocks Your Server, provides a mechanism for mock
 
 AMYServer addresses these problems by creating KIF test actors to represent your servers.  With a little setup, your tests will develop into a logical story where you can really understand what your system is doing:
 
-    [tester enterText:@"brian" intoViewWithAccessibilityLabel:@"Username"];
-    [tester enterText:@"$ecret" intoViewWithAccessibilityLabel:@"Password"];
-    
-    [myServer waitForLoginWithUsername:@"brian" password:@"$ecret"
-              andRespondWithSuccess:YES message:@"Welcome, Brian" token:@"12345"];
-    
-    [tester waitForViewWithAccessibilityLabel:@"Welcome, Brian"];
+```ObjC
+[tester enterText:@"brian" intoViewWithAccessibilityLabel:@"Username"];
+[tester enterText:@"$ecret" intoViewWithAccessibilityLabel:@"Password"];
+
+[myServer waitForLoginWithUsername:@"brian" password:@"$ecret"
+          andRespondWithSuccess:YES message:@"Welcome, Brian" token:@"12345"];
+
+[tester waitForViewWithAccessibilityLabel:@"Welcome, Brian"];
+```
 
 AMYServer also integrates with Mocktail to simplify the process of setting up new tests.  If you have existing tail files you can integrate them with just a few lines to code.
-
-**Important Notes:** AMYServer does not run against the standard KIF build from Square but instead the KIF-next branch on [bnickel/KIF](https://github.com/bnickel/KIF).  I have not yet worked on this with a real system so the API is unstable and input is welcome.
 
 See AMYServer in Action
 -----------------------
@@ -33,29 +33,33 @@ Installation
 
 AMYServer can be installed with a [CocoaPods](http://cocoapods.org).
 
-    target 'Acceptance Tests' do
-      pod 'AMYServer', '~> 0.0'
-    end
+```Ruby
+target 'Acceptance Tests' do
+  pod 'AMYServer', '~> 1.0'
+end
+```
 
 Example 1: Using Mocktails
 --------------------------
 
-This example assumes you are already familiar with KIF-next and Mocktail.
+This example assumes you are already familiar with KIF 2.0 and Mocktail.
 
 The first step is to define your server with the API it will use:
 
 **ExampleServer.h**
 
-    #import "AMYServer.h"
+```ObjC
+#import "AMYServer.h"
 
-    #define exampleServer KIFActorWithClass(ExampleServer) // (3)
+#define exampleServer KIFActorWithClass(ExampleServer) // (3)
 
-    @interface ExampleServer : AMYServer // (1)
+@interface ExampleServer : AMYServer // (1)
 
-    - (void)waitForLoginAndRespondWithMessage:(NSString *)message
-                                        token:(NSString *)token; // (2)
+- (void)waitForLoginAndRespondWithMessage:(NSString *)message
+                                    token:(NSString *)token; // (2)
 
-    @end
+@end
+```
 
 1. Create a new instance of `AMYServer` for your server.
 2. Define methods that make sense in the context of your script with information you can validate or provide.

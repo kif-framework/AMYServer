@@ -1,16 +1,20 @@
 PODS:
-  - GRMustache (6.7.5):
+  - GRMustache (6.8.2):
     - JRSwizzle (~> 1.0)
   - JRSwizzle (1.0)
-  - KIF-next (2.0.0pre4)
+  - KIF (2.0.0)
 
 DEPENDENCIES:
   - GRMustache (~> 6.7)
-  - KIF-next (= 2.0.0pre4)
+  - KIF (from `https://raw.github.com/kif-framework/KIF/v2.0.0/KIF.podspec`)
+
+EXTERNAL SOURCES:
+  KIF:
+    :podspec: https://raw.github.com/kif-framework/KIF/v2.0.0/KIF.podspec
 
 SPEC CHECKSUMS:
-  GRMustache: fd8c4885861658b6bb79fedfbca10beb02edc97b
+  GRMustache: 9ea300db470733cfe8824896c07c8898a7102109
   JRSwizzle: 6242ff38485d870fc2636899048ee1ab883ae587
-  KIF-next: 1c59f919ceee5999373c875832101c2fb48b5f59
+  KIF: ff3b46deb62ce3f8e99c6a2c786729e1eea241ba
 
 COCOAPODS: 0.22.2
