@@ -29,7 +29,13 @@
 {
     if ([_protocol canRespond]) {
         NSHTTPURLResponse *response = [[NSHTTPURLResponse alloc] initWithURL:self.URLRequest.URL statusCode:statusCode HTTPVersion:HTTPVersion headerFields:headerFields];
-        [_protocol.client URLProtocol:_protocol didReceiveResponse:response cacheStoragePolicy:cacheStoragePolicy];
+        
+        if ((statusCode == 301 || statusCode == 302) && headerFields[@"Location"]) {
+            NSURLRequest *redirectRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:headerFields[@"Location"] relativeToURL:self.URLRequest.URL]];
+            [_protocol.client URLProtocol:_protocol wasRedirectedToRequest:redirectRequest redirectResponse:response];
+        } else {
+            [_protocol.client URLProtocol:_protocol didReceiveResponse:response cacheStoragePolicy:cacheStoragePolicy];
+        }
     }
 }
 
