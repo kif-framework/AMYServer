@@ -1,6 +1,6 @@
 // The MIT License
 //
-// Copyright (c) 2013 Gwendal Roué
+// Copyright (c) 2014 Gwendal Roué
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,9 +22,8 @@
 
 #import <Foundation/Foundation.h>
 #import "GRMustacheAvailabilityMacros_private.h"
-#import "GRMustacheToken_private.h"
 
-
+@class GRMustacheToken;
 @class GRMustacheParser;
 @class GRMustacheConfiguration;
 
@@ -131,6 +130,19 @@
  * @return a template name, or nil if the string is not a partial name.
  */
 - (NSString *)parseTemplateName:(NSString *)string empty:(BOOL *)empty error:(NSError **)error GRMUSTACHE_API_INTERNAL;
+
+/**
+ * Returns an inheritable section identifier from a string.
+ *
+ * @param string  A string.
+ * @param empty   If there is an error parsing an identifier, upon return
+ *                contains YES if the string contains no information.
+ * @param error   If there is an error parsing an identifier, upon return
+ *                contains an NSError object that describes the problem.
+ *
+ * @return a template name, or nil if the string is not a partial name.
+ */
+- (NSString *)parseInheritableSectionIdentifier:(NSString *)string empty:(BOOL *)empty error:(NSError **)error GRMUSTACHE_API_INTERNAL;
 
 /**
  * Returns a pragma from a string

@@ -1,6 +1,6 @@
 // The MIT License
 //
-// Copyright (c) 2013 Gwendal Roué
+// Copyright (c) 2014 Gwendal Roué
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,12 +26,13 @@
 #import "GRMustacheToken_private.h"
 #import "GRMustacheContext_private.h"
 #import "GRMustache_private.h"
-#import "GRMustacheRendering.h"
+#import "GRMustacheTranslateCharacters_private.h"
+#import "GRMustacheTagDelegate.h"
+#import "GRMustacheRendering_private.h"
 
 @implementation GRMustacheTag
 @synthesize type=_type;
 @synthesize expression=_expression;
-@synthesize templateRepository=_templateRepository;
 @synthesize contentType=_contentType;
 
 - (void)dealloc
@@ -40,12 +41,11 @@
     [super dealloc];
 }
 
-- (id)initWithType:(GRMustacheTagType)type templateRepository:(GRMustacheTemplateRepository *)templateRepository expression:(GRMustacheExpression *)expression contentType:(GRMustacheContentType)contentType
+- (id)initWithType:(GRMustacheTagType)type expression:(GRMustacheExpression *)expression contentType:(GRMustacheContentType)contentType
 {
     self = [super init];
     if (self) {
         _type = type;
-        _templateRepository = templateRepository;   // do not retain, since templateRepository retains the template that retains self.
         _expression = [expression retain];
         _contentType = contentType;
     }
@@ -95,16 +95,15 @@
     return @"";
 }
 
-- (GRMustacheTag *)tagWithOverridingTag:(GRMustacheTag *)overridingTag
+- (GRMustacheTemplateRepository *)templateRepository
 {
-    NSAssert(NO, @"Subclasses must override");
-    return nil;
+    return [GRMustacheRendering currentTemplateRepository];
 }
 
 
 #pragma mark - <GRMustacheTemplateComponent>
 
-- (BOOL)renderContentType:(GRMustacheContentType)requiredContentType inBuffer:(NSMutableString *)buffer withContext:(GRMustacheContext *)context error:(NSError **)error
+- (BOOL)renderContentType:(GRMustacheContentType)requiredContentType inBuffer:(GRMustacheBuffer *)buffer withContext:(GRMustacheContext *)context error:(NSError **)error
 {
     NSAssert(requiredContentType == _contentType, @"Not implemented");
     
@@ -165,7 +164,7 @@
                 //
                 // Of course this is not what we want. So `name` can not be
                 // protected. Since we don't want to let the user think he is data
-                // is protected when it is not, we prevent this whole pattern, and
+                // is given protected when it is not, we prevent this whole pattern, and
                 // forbid `{{#safe}}{{name}}{{/safe}}`.
                 context = [context contextByAddingHiddenObject:object];
             }
@@ -185,7 +184,7 @@
         
             BOOL objectHTMLSafe = NO;
             NSError *renderingError = nil;  // set it to nil, so that we can help lazy coders who return nil as a valid rendering.
-            NSString *rendering = [[GRMustache renderingObjectForObject:object] renderForMustacheTag:self context:context HTMLSafe:&objectHTMLSafe error:&renderingError];
+            NSString *rendering = [[GRMustacheRendering renderingObjectForObject:object] renderForMustacheTag:self context:context HTMLSafe:&objectHTMLSafe error:&renderingError];
             
             if (rendering == nil && renderingError == nil)
             {
@@ -202,13 +201,13 @@
             
             if (rendering)
             {
-                // Success
+                // render
                 
                 if (rendering.length > 0) {
                     if ((requiredContentType == GRMustacheContentTypeHTML) && !objectHTMLSafe && self.escapesHTML) {
-                        rendering = [GRMustache escapeHTML:rendering];
+                        rendering = GRMustacheTranslateHTMLCharacters(rendering);
                     }
-                    [buffer appendString:rendering];
+                    GRMustacheBufferAppendString(buffer, rendering);
                 }
                 
                 
@@ -249,29 +248,8 @@
 
 - (id<GRMustacheTemplateComponent>)resolveTemplateComponent:(id<GRMustacheTemplateComponent>)component
 {
-    // Only overridable tags can override components
-    if (_type != GRMustacheTagTypeOverridableSection) {
-        return component;
-    }
-    
-    // Tag can only override other tag
-    if (![component isKindOfClass:[GRMustacheTag class]]) {
-        return component;
-    }
-    GRMustacheTag *otherTag = (GRMustacheTag *)component;
-    
-    // Tag can only override other overridable tag
-    if (otherTag.type != GRMustacheTagTypeOverridableSection) {
-        return otherTag;
-    }
-    
-    // Tag can only override other tag with the same expression
-    if (![otherTag.expression isEqual:_expression]) {
-        return otherTag;
-    }
-    
-    // OK, override tag with self
-    return [otherTag tagWithOverridingTag:self];
+    // tags can not override any other component
+    return component;
 }
 
 @end

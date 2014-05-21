@@ -45,6 +45,11 @@ UIKIT_EXTERN NSString *const UIApplicationOpenedURLKey;
 - (UIWindow *)keyboardWindow;
 
 /*!
+ @returns The topmost window containing a @c UIDatePicker.
+ */
+- (UIWindow *)datePickerWindow;
+
+/*!
  @returns The topmost window containing a @c UIPickerView.
  */
 - (UIWindow *)pickerViewWindow;
@@ -58,6 +63,17 @@ UIKIT_EXTERN NSString *const UIApplicationOpenedURLKey;
  @returns All windows in the application, including the key window even if it does not appear in @c -windows.
  */
 - (NSArray *)windowsWithKeyWindow;
+
+/*!
+ @abstract Writes a screenshot to disk.
+ @discussion This method only works if the @c KIF_SCREENSHOTS environment variable is set.
+ @param lineNumber The line number in the code at which the screenshot was taken.
+ @param filename The name of the file in which the screenshot was taken.
+ @param description An optional description of the scene being captured.
+ @param error If the method returns @c YES, this optional parameter provides additional information as to why it failed.
+ @returns @c YES if the screenshot was written to disk, otherwise @c NO.
+ */
+- (BOOL)writeScreenshotForLine:(NSUInteger)lineNumber inFile:(NSString *)filename description:(NSString *)description error:(NSError **)error;
 
 /*!
  @returns The current run loop mode.
@@ -82,3 +98,11 @@ UIKIT_EXTERN NSString *const UIApplicationOpenedURLKey;
 + (void)stopMockingOpenURL;
 
 @end
+
+@interface UIApplication (Private)
+- (BOOL)rotateIfNeeded:(UIDeviceOrientation)orientation;
+- (void)rotateIfNeeded:(UIDeviceOrientation)orientation completion:(void (^)(void))completion;
+- (UIWindow *)statusBarWindow;
+@property(getter=isStatusBarHidden) BOOL statusBarHidden;
+@end
+

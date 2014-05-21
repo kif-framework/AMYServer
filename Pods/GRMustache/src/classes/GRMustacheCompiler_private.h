@@ -1,6 +1,6 @@
 // The MIT License
 //
-// Copyright (c) 2013 Gwendal Roué
+// Copyright (c) 2014 Gwendal Roué
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,33 +23,10 @@
 #import <Foundation/Foundation.h>
 #import "GRMustacheAvailabilityMacros_private.h"
 #import "GRMustacheParser_private.h"
-#import "GRMustache_private.h"
-#import "GRMustacheConfiguration_private.h"
+#import "GRMustacheContentType.h"
 
-
-@class GRMustacheCompiler;
 @class GRMustacheTemplateRepository;
-@protocol GRMustacheTemplateComponent;
-
-/**
- * The GRMustacheAST represents the abstract syntax tree of a template.
- */
-@interface GRMustacheAST : NSObject {
-@private
-    NSArray *_templateComponents;
-    GRMustacheContentType _contentType;
-}
-
-/**
- * An NSArray containing <GRMustacheTemplateComponent> instances
- */
-@property (nonatomic, retain, readonly) NSArray *templateComponents GRMUSTACHE_API_INTERNAL;
-
-/**
- * The content type of the AST
- */
-@property (nonatomic, readonly) GRMustacheContentType contentType GRMUSTACHE_API_INTERNAL;
-@end
+@class GRMustacheAST;
 
 /**
  * The GRMustacheCompiler interprets GRMustacheTokens provided by a
@@ -75,6 +52,7 @@
     NSMutableArray *_tagValueStack;
     
     GRMustacheTemplateRepository *_templateRepository;
+    id _baseTemplateID;
     GRMustacheContentType _contentType;
     BOOL _contentTypeLocked;
 }
@@ -85,13 +63,18 @@
 @property (nonatomic, assign) GRMustacheTemplateRepository *templateRepository GRMUSTACHE_API_INTERNAL;
 
 /**
+ * ID of the currently compiled template
+ */
+@property (nonatomic, retain) id baseTemplateID GRMUSTACHE_API_INTERNAL;
+
+/**
  * Returns an initialized compiler.
  *
- * @param configuration  The GRMustacheConfiguration that affects the
- *                       compilation phase.
+ * @param contentType  The contentType that affects the compilation phase.
+ *
  * @return a compiler
  */
-- (id)initWithConfiguration:(GRMustacheConfiguration *)configuration GRMUSTACHE_API_INTERNAL;
+- (id)initWithContentType:(GRMustacheContentType)contentType GRMUSTACHE_API_INTERNAL;
 
 /**
  * Returns a Mustache Abstract Syntax Tree.
@@ -101,24 +84,26 @@
  *
  * For example:
  *
- *     // Create a Mustache compiler
- *     GRMustacheCompiler *compiler = [[[GRMustacheCompiler alloc] initWithConfiguration:...] autorelease];
+ * ```
+ * // Create a Mustache compiler
+ * GRMustacheCompiler *compiler = [[[GRMustacheCompiler alloc] initWithContentType:...] autorelease];
  *
- *     // Some GRMustacheCompilerDataSource tells the compiler where are the
- *     // partials.
- *     compiler.dataSource = ...;
+ * // Some GRMustacheCompilerDataSource tells the compiler where are the
+ * // partials.
+ * compiler.dataSource = ...;
  *
- *     // Create a Mustache parser
- *     GRMustacheParser *parser = [[[GRMustacheParser alloc] initWithConfiguration:...] autorelease];
+ * // Create a Mustache parser
+ * GRMustacheParser *parser = [[[GRMustacheParser alloc] initWithContentType:...] autorelease];
  *
- *     // The parser feeds the compiler
- *     parser.delegate = compiler;
+ * // The parser feeds the compiler
+ * parser.delegate = compiler;
  *
- *     // Parse some string
- *     [parser parseTemplateString:... templateID:...];
+ * // Parse some string
+ * [parser parseTemplateString:... templateID:...];
  *
- *     // Extract template components from the compiler
- *     GRMustacheAST *AST = [compiler ASTReturningError:...];
+ * // Extract template components from the compiler
+ * GRMustacheAST *AST = [compiler ASTReturningError:...];
+ * ```
  *
  * @param error  If there is an error building the abstract syntax tree, upon
  *               return contains an NSError object that describes the problem.

@@ -1,6 +1,6 @@
 // The MIT License
 //
-// Copyright (c) 2013 Gwendal Roué
+// Copyright (c) 2014 Gwendal Roué
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -63,9 +63,8 @@
             // Behave as a truthy object: don't render for inverted sections
             return nil;
             
-        default:
+        case GRMustacheTagTypeSection:
             // {{# formatter }}...{{/ formatter }}
-            // {{$ formatter }}...{{/ formatter }}
             
             // Render normally, but listen to all inner tags rendering, so that
             // we can format them. See mustacheTag:willRenderObject: below.

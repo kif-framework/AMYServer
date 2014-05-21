@@ -1,6 +1,6 @@
 // The MIT License
 // 
-// Copyright (c) 2013 Gwendal Roué
+// Copyright (c) 2014 Gwendal Roué
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,21 +23,27 @@
 #import "GRMustacheTemplate_private.h"
 #import "GRMustacheContext_private.h"
 #import "GRMustacheTemplateRepository_private.h"
-#import "GRMustacheSectionTag_private.h"
-#import "GRMustacheRendering.h"
+#import "GRMustacheRendering_private.h"
+#import "GRMustacheTemplateComponent_private.h"
+#import "GRMustachePartial_private.h"
+#import "GRMustacheAST_private.h"
 
 @interface GRMustacheTemplate()<GRMustacheRendering>
 @end
 
 @implementation GRMustacheTemplate
-@synthesize components=_components;
-@synthesize contentType=_contentType;
+@synthesize templateRepository=_templateRepository;
+@synthesize partial=_partial;
 @synthesize baseContext=_baseContext;
 
 + (instancetype)templateFromString:(NSString *)templateString error:(NSError **)error
 {
-    GRMustacheTemplateRepository *templateRepository = [GRMustacheTemplateRepository templateRepositoryWithBundle:[NSBundle mainBundle]];
-    return [templateRepository templateFromString:templateString error:error];
+    GRMustacheTemplateRepository *templateRepository = [GRMustacheRendering currentTemplateRepository];
+    if (templateRepository == nil) {
+        templateRepository = [GRMustacheTemplateRepository templateRepositoryWithBundle:[NSBundle mainBundle]];
+    }
+    GRMustacheContentType contentType = [GRMustacheRendering currentContentType];
+    return [templateRepository templateFromString:templateString contentType:contentType error:error];
 }
 
 + (instancetype)templateFromResource:(NSString *)name bundle:(NSBundle *)bundle error:(NSError **)error
@@ -78,8 +84,9 @@
 
 - (void)dealloc
 {
-    [_components release];
+    [_partial release];
     [_baseContext release];
+    [_templateRepository release];
     [super dealloc];
 }
 
@@ -115,14 +122,22 @@
 
 - (NSString *)renderContentWithContext:(GRMustacheContext *)context HTMLSafe:(BOOL *)HTMLSafe error:(NSError **)error
 {
-    NSMutableString *buffer = [NSMutableString string];
-    if (![self renderContentType:self.contentType inBuffer:buffer withContext:context error:error]) {
+    GRMustacheContentType contentType = _partial.AST.contentType;
+    GRMustacheBuffer buffer = GRMustacheBufferCreate(1024);
+    
+    [GRMustacheRendering pushCurrentTemplateRepository:self.templateRepository];
+    BOOL success = [_partial renderContentType:contentType inBuffer:&buffer withContext:context error:error];
+    [GRMustacheRendering popCurrentTemplateRepository];
+    
+    if (!success) {
+        GRMustacheBufferRelease(&buffer);
         return nil;
+    } else {
+        if (HTMLSafe) {
+            *HTMLSafe = (contentType == GRMustacheContentTypeHTML);
+        }
+        return GRMustacheBufferGetStringAndRelease(&buffer);
     }
-    if (HTMLSafe) {
-        *HTMLSafe = (self.contentType == GRMustacheContentTypeHTML);
-    }
-    return buffer;
 }
 
 - (void)setBaseContext:(GRMustacheContext *)baseContext
@@ -136,75 +151,6 @@
         [_baseContext release];
         _baseContext = [baseContext retain];
     }
-}
-
-
-#pragma mark - <GRMustacheTemplateComponent>
-
-- (BOOL)renderContentType:(GRMustacheContentType)requiredContentType inBuffer:(NSMutableString *)buffer withContext:(GRMustacheContext *)context error:(NSError **)error
-{
-    if (!context) {
-        // With a nil context, the method would return NO without setting the
-        // error argument.
-        [NSException raise:NSInvalidArgumentException format:@"Invalid context:nil"];
-        return NO;
-    }
-    
-    NSMutableString *needsEscapingBuffer = nil;
-    NSMutableString *renderingBuffer = nil;
-    
-    if (requiredContentType == GRMustacheContentTypeHTML && (self.contentType != GRMustacheContentTypeHTML)) {
-        // Self renders text, but is asked for HTML.
-        // This happens when self is a text partial embedded in a HTML template.
-        //
-        // We'll have to HTML escape our rendering.
-        needsEscapingBuffer = [NSMutableString string];
-        renderingBuffer = needsEscapingBuffer;
-    } else {
-        // Self renders text and is asked for text,
-        // or self renders HTML and is asked for HTML.
-        //
-        // We won't need any specific processing here.
-        renderingBuffer = buffer;
-    }
-    
-    for (id<GRMustacheTemplateComponent> component in _components) {
-        // component may be overriden by a GRMustacheTemplateOverride: resolve it.
-        component = [context resolveTemplateComponent:component];
-        
-        // render
-        if (![component renderContentType:self.contentType inBuffer:renderingBuffer withContext:context error:error]) {
-            return NO;
-        }
-    }
-    
-    if (needsEscapingBuffer) {
-        [buffer appendString:[GRMustache escapeHTML:needsEscapingBuffer]];
-    }
-    
-    return YES;
-}
-
-- (id<GRMustacheTemplateComponent>)resolveTemplateComponent:(id<GRMustacheTemplateComponent>)component
-{
-    // look for the last overriding component in inner components.
-    //
-    // This allows a partial do define an overriding section:
-    //
-    //    {
-    //        data: { },
-    //        expected: "partial1",
-    //        name: "Partials in overridable partials can override overridable sections",
-    //        template: "{{<partial2}}{{>partial1}}{{/partial2}}"
-    //        partials: {
-    //            partial1: "{{$overridable}}partial1{{/overridable}}";
-    //            partial2: "{{$overridable}}ignored{{/overridable}}";
-    //        },
-    //    }
-    for (id<GRMustacheTemplateComponent> innerComponent in _components) {
-        component = [innerComponent resolveTemplateComponent:component];
-    }
-    return component;
 }
 
 

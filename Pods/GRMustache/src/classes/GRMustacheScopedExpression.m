@@ -1,6 +1,6 @@
 // The MIT License
 // 
-// Copyright (c) 2013 Gwendal Roué
+// Copyright (c) 2014 Gwendal Roué
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
 
 #import "GRMustacheScopedExpression_private.h"
 #import "GRMustacheContext_private.h"
-#import "GRMustacheContext_private.h"
+#import "GRMustacheKeyAccess_private.h"
 
 @interface GRMustacheScopedExpression()
 @property (nonatomic, retain) GRMustacheExpression *baseExpression;
@@ -74,6 +74,11 @@
     return [_scopeIdentifier isEqual:((GRMustacheScopedExpression *)expression).scopeIdentifier];
 }
 
+- (NSUInteger)hash
+{
+    return [_baseExpression hash] ^ [_scopeIdentifier hash];
+}
+
 
 #pragma mark - GRMustacheExpression
 
@@ -88,7 +93,7 @@
         *protected = NO;
     }
     if (value) {
-        *value = [GRMustacheContext valueForKey:_scopeIdentifier inObject:scopedValue];
+        *value = [GRMustacheKeyAccess valueForMustacheKey:_scopeIdentifier inObject:scopedValue unsafeKeyAccess:context.unsafeKeyAccess];
     }
     return YES;
 }

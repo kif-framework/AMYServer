@@ -10,6 +10,8 @@
 #import "UIApplication-KIFAdditions.h"
 #import "LoadableCategory.h"
 #import "UIView-KIFAdditions.h"
+#import "NSError-KIFAdditions.h"
+#import <QuartzCore/QuartzCore.h>
 #import <objc/runtime.h>
 #import <objc/message.h>
 
@@ -30,6 +32,8 @@ NSString *const UIApplicationOpenedURLKey = @"UIApplicationOpenedURL";
 static const void *KIFRunLoopModesKey = &KIFRunLoopModesKey;
 
 @implementation UIApplication (KIFAdditions)
+
+#pragma mark - Finding elements
 
 - (UIAccessibilityElement *)accessibilityElementWithLabel:(NSString *)label accessibilityValue:(NSString *)value traits:(UIAccessibilityTraits)traits;
 {
@@ -57,6 +61,8 @@ static const void *KIFRunLoopModesKey = &KIFRunLoopModesKey;
     return nil;
 }
 
+#pragma mark - Interesting windows
+
 - (UIWindow *)keyboardWindow;
 {
     for (UIWindow *window in self.windowsWithKeyWindow) {
@@ -68,27 +74,30 @@ static const void *KIFRunLoopModesKey = &KIFRunLoopModesKey;
     return nil;
 }
 
+- (UIWindow *)datePickerWindow;
+{
+    return [self getWindowForSubviewClass:@"UIDatePicker"];
+}
+
 - (UIWindow *)pickerViewWindow;
 {
-    for (UIWindow *window in self.windowsWithKeyWindow) {
-        NSArray *pickerViews = [window subviewsWithClassNameOrSuperClassNamePrefix:@"UIPickerView"];
-        if (pickerViews.count > 0) {
-            return window;
-        }
-    }
-    
-    return nil;
+    return [self getWindowForSubviewClass:@"UIPickerView"];
 }
 
 - (UIWindow *)dimmingViewWindow;
 {
+    return [self getWindowForSubviewClass:@"UIDimmingView"];
+}
+
+- (UIWindow *)getWindowForSubviewClass:(NSString*)className;
+{
     for (UIWindow *window in self.windowsWithKeyWindow) {
-        NSArray *dimmingViews = [window subviewsWithClassNameOrSuperClassNamePrefix:@"UIDimmingView"];
-        if (dimmingViews.count > 0) {
+        NSArray *subViews = [window subviewsWithClassNameOrSuperClassNamePrefix:className];
+        if (subViews.count > 0) {
             return window;
         }
     }
-    
+
     return nil;
 }
 
@@ -99,8 +108,56 @@ static const void *KIFRunLoopModesKey = &KIFRunLoopModesKey;
     if (![windows containsObject:keyWindow]) {
         [windows addObject:keyWindow];
     }
-    return [windows autorelease];
+    return windows;
 }
+
+#pragma mark - Screenshoting
+
+- (BOOL)writeScreenshotForLine:(NSUInteger)lineNumber inFile:(NSString *)filename description:(NSString *)description error:(NSError **)error;
+{
+    NSString *outputPath = [[[NSProcessInfo processInfo] environment] objectForKey:@"KIF_SCREENSHOTS"];
+    if (!outputPath) {
+        if (error) {
+            *error = [NSError KIFErrorWithFormat:@"Screenshot path not defined. Please set KIF_SCREENSHOTS environment variable."];
+        }
+        return NO;
+    }
+    
+    NSArray *windows = [self windowsWithKeyWindow];
+    if (windows.count == 0) {
+        if (error) {
+            *error = [NSError KIFErrorWithFormat:@"Could not take screenshot.  No windows were available."];
+        }
+        return NO;
+    }
+    
+    UIGraphicsBeginImageContext([[windows objectAtIndex:0] bounds].size);
+    for (UIWindow *window in windows) {
+        [window.layer renderInContext:UIGraphicsGetCurrentContext()];
+    }
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    
+    NSString *imageName = [NSString stringWithFormat:@"%@, line %lu", [filename lastPathComponent], (unsigned long)lineNumber];
+    if (description) {
+        imageName = [imageName stringByAppendingFormat:@", %@", description];
+    }
+    
+    outputPath = [outputPath stringByExpandingTildeInPath];
+    outputPath = [outputPath stringByAppendingPathComponent:imageName];
+    outputPath = [outputPath stringByAppendingPathExtension:@"png"];
+    if (![UIImagePNGRepresentation(image) writeToFile:outputPath atomically:YES]) {
+        if (error) {
+            *error = [NSError KIFErrorWithFormat:@"Could not write file at path %@", outputPath];
+        }
+        return NO;
+    }
+    
+    return YES;
+}
+
+#pragma mark - Run loop monitoring
 
 - (NSMutableArray *)KIF_runLoopModes;
 {
@@ -114,7 +171,7 @@ static const void *KIFRunLoopModesKey = &KIFRunLoopModesKey;
 
 - (CFStringRef)currentRunLoopMode;
 {
-    return (CFStringRef)[self KIF_runLoopModes].lastObject;
+    return (__bridge CFStringRef)[self KIF_runLoopModes].lastObject;
 }
 
 - (void)KIF_pushRunLoopMode:(NSString *)mode;
@@ -172,6 +229,8 @@ static inline void Swizzle(Class c, SEL orig, SEL new)
         Swizzle(self, @selector(popRunLoopMode:requester:), @selector(KIF_popRunLoopMode:requester:));
     });
 }
+
+#pragma mark - openURL mocking
 
 + (void)startMockingOpenURLWithReturnValue:(BOOL)returnValue;
 {

@@ -8,6 +8,7 @@
 //  which Square, Inc. licenses this file to you.
 
 #import "KIFTestActor.h"
+#import <UIKit/UIKit.h>
 
 #define system KIFActorWithClass(KIFSystemTestActor)
 
@@ -39,6 +40,13 @@
 - (void)simulateMemoryWarning;
 
 /*!
+ @abstract Simulates a device rotation to a specific orentation from its last set orientation.
+ @discussion The first time this method is called, it will be from the device's natural orientation to the orientation described.
+ @param orientation The desired orientation.
+ */
+- (void)simulateDeviceRotationToOrientation:(UIDeviceOrientation)orientation;
+
+/*!
  @abstract Waits for the application to request a specific URL while executing a block.
  @param URLString The absolute string representation of the URL to detect.
  @param block The block of code to be executed.
@@ -52,5 +60,12 @@
  @param returnValue The value to return from @c +[UIApplication openURL:].
  */
 - (void)waitForApplicationToOpenAnyURLWhileExecutingBlock:(void(^)())block returning:(BOOL)returnValue;
+
+/*!
+ @abstract Captured a screenshot of the current screen and writes it to disk with an optional description.
+ @discussion This step will fail if the @c KIF_SCREENSHOTS environment variable is not set or if the screenshot cannot be written to disk.
+ @param description A description to use when writing the file to disk.
+ */
+- (void)captureScreenshotWithDescription:(NSString *)description;
 
 @end

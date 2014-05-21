@@ -1,6 +1,6 @@
 // The MIT License
 // 
-// Copyright (c) 2013 Gwendal Roué
+// Copyright (c) 2014 Gwendal Roué
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,29 +21,21 @@
 // THE SOFTWARE.
 
 #import "GRMustacheSectionTag_private.h"
-#import "GRMustacheExpression_private.h"
-#import "GRMustacheTemplateComponent_private.h"
-#import "GRMustacheTemplate_private.h"
-#import "GRMustacheAccumulatorTag_private.h"
-#import "GRMustacheTagDelegate.h"
-#import "GRMustacheContext_private.h"
-#import "GRMustacheRendering.h"
-#import "GRMustache_private.h"
 
 @interface GRMustacheSectionTag()
 
 /**
- * @see +[GRMustacheSectionTag sectionTagWithExpression:templateString:innerRange:inverted:overridable:components:]
+ * @see +[GRMustacheSectionTag sectionTagWithExpression:templateString:innerRange:inverted:inheritable:components:]
  */
-- (id)initWithType:(GRMustacheTagType)type templateRepository:(GRMustacheTemplateRepository *)templateRepository expression:(GRMustacheExpression *)expression contentType:(GRMustacheContentType)contentType templateString:(NSString *)templateString innerRange:(NSRange)innerRange components:(NSArray *)components;
+- (id)initWithType:(GRMustacheTagType)type expression:(GRMustacheExpression *)expression contentType:(GRMustacheContentType)contentType templateString:(NSString *)templateString innerRange:(NSRange)innerRange components:(NSArray *)components;
 @end
 
 
 @implementation GRMustacheSectionTag
 
-+ (instancetype)sectionTagWithType:(GRMustacheTagType)type templateRepository:(GRMustacheTemplateRepository *)templateRepository expression:(GRMustacheExpression *)expression contentType:(GRMustacheContentType)contentType templateString:(NSString *)templateString innerRange:(NSRange)innerRange components:(NSArray *)components
++ (instancetype)sectionTagWithType:(GRMustacheTagType)type expression:(GRMustacheExpression *)expression contentType:(GRMustacheContentType)contentType templateString:(NSString *)templateString innerRange:(NSRange)innerRange components:(NSArray *)components
 {
-    return [[[self alloc] initWithType:type templateRepository:templateRepository expression:expression contentType:contentType templateString:templateString innerRange:innerRange components:components] autorelease];
+    return [[[self alloc] initWithType:type expression:expression contentType:contentType templateString:templateString innerRange:innerRange components:components] autorelease];
 }
 
 - (void)dealloc
@@ -65,14 +57,14 @@
         return NO;
     }
     
-    NSMutableString *buffer = [NSMutableString string];
+    GRMustacheBuffer buffer = GRMustacheBufferCreate(MAX(1024, (_innerRange.length + 50) * 1.3));
     
     for (id<GRMustacheTemplateComponent> component in _components) {
-        // component may be overriden by a GRMustacheTemplateOverride: resolve it.
+        // component may be overriden by a GRMustacheInheritablePartial: resolve it.
         component = [context resolveTemplateComponent:component];
         
         // render
-        if (![component renderContentType:_contentType inBuffer:buffer withContext:context error:error]) {
+        if (![component renderContentType:_contentType inBuffer:&buffer withContext:context error:error]) {
             return nil;
         }
     }
@@ -80,7 +72,8 @@
     if (HTMLSafe) {
         *HTMLSafe = (_contentType == GRMustacheContentTypeHTML);
     }
-    return buffer;
+    
+    return GRMustacheBufferGetStringAndRelease(&buffer);
 }
 
 - (NSString *)innerTemplateString
@@ -88,46 +81,12 @@
     return [_templateString substringWithRange:_innerRange];
 }
 
-- (GRMustacheTag *)tagWithOverridingTag:(GRMustacheTag *)overridingTag
-{
-    // In the following situation, the overriden section (self) is replaced by
-    // an accumulator tag initialized with the overriding section:
-    //
-    // layout.mustache:
-    //
-    //   {{$head}}overriden{{/head}}            <- overriden section (self)
-    //
-    // base.mustache:
-    //
-    //   {{<layout}}
-    //     {{>partial1}}
-    //     {{>partial2}}
-    //   {{/}}
-    //
-    // partial1.mustache:
-    //
-    //   {{$head}}head for partial 1{{/head}}   <- overriding section
-    //
-    // partial2.mustache:
-    //
-    //   {{$head}}head for partial 2{{/head}}
-    //
-    // Rendering:
-    //
-    //   head for partial 1
-    //   head for partial 2
-    //
-    // Later, the accumulatorTag will itself be overriden by the section in
-    // partial2. See [GRMustacheAccumulatorTag tagWithOverridingTag:]
-
-    return [GRMustacheAccumulatorTag accumulatorTagWithTag:overridingTag];
-}
 
 #pragma mark - Private
 
-- (id)initWithType:(GRMustacheTagType)type templateRepository:(GRMustacheTemplateRepository *)templateRepository expression:(GRMustacheExpression *)expression contentType:(GRMustacheContentType)contentType templateString:(NSString *)templateString innerRange:(NSRange)innerRange components:(NSArray *)components
+- (id)initWithType:(GRMustacheTagType)type expression:(GRMustacheExpression *)expression contentType:(GRMustacheContentType)contentType templateString:(NSString *)templateString innerRange:(NSRange)innerRange components:(NSArray *)components
 {
-    self = [super initWithType:type templateRepository:templateRepository expression:expression contentType:contentType];
+    self = [super initWithType:type expression:expression contentType:contentType];
     if (self) {
         _templateString = [templateString retain];
         _innerRange = innerRange;

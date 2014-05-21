@@ -9,6 +9,12 @@
 
 #import <Foundation/Foundation.h>
 
+#ifdef DEPRECATED_MSG_ATTRIBUTE
+#define KIF_DEPRECATED(m) DEPRECATED_MSG_ATTRIBUTE(m)
+#else
+#define KIF_DEPRECATED(m)
+#endif
+
 #define KIFActorWithClass(clazz) [clazz actorInFile:[NSString stringWithUTF8String:__FILE__] atLine:__LINE__ delegate:self]
 
 /*!
@@ -53,12 +59,11 @@ return KIFTestStepResultWait; \
  @constant KIFTestStepResultSuccess The step succeeded and the test controller should move to the next step in the current scenario.
  @constant KIFTestStepResultWait The test isn't ready yet and should be tried again after a short delay.
  */
-enum {
+typedef NS_ENUM(NSUInteger, KIFTestStepResult) {
     KIFTestStepResultFailure = 0,
     KIFTestStepResultSuccess,
     KIFTestStepResultWait,
 };
-typedef NSInteger KIFTestStepResult;
 
 /*!
  @typedef KIFTestExecutionBlock
@@ -80,9 +85,9 @@ typedef void (^KIFTestCompletionBlock)(KIFTestStepResult result, NSError *error)
 
 + (instancetype)actorInFile:(NSString *)file atLine:(NSInteger)line delegate:(id<KIFTestActorDelegate>)delegate;
 
-@property (nonatomic, readonly) NSString *file;
+@property (strong, nonatomic, readonly) NSString *file;
 @property (nonatomic, readonly) NSInteger line;
-@property (nonatomic, readonly) id<KIFTestActorDelegate> delegate;
+@property (weak, nonatomic, readonly) id<KIFTestActorDelegate> delegate;
 @property (nonatomic) NSTimeInterval executionBlockTimeout;
 
 - (instancetype)usingTimeout:(NSTimeInterval)executionBlockTimeout;

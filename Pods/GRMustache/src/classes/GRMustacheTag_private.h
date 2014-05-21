@@ -1,6 +1,6 @@
 // The MIT License
 //
-// Copyright (c) 2013 Gwendal Roué
+// Copyright (c) 2014 Gwendal Roué
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,18 +23,17 @@
 #import <Foundation/Foundation.h>
 #import "GRMustacheAvailabilityMacros_private.h"
 #import "GRMustacheTemplateComponent_private.h"
-#import "GRMustacheConfiguration_private.h"
+#import "GRMustacheContentType.h"
 
 @class GRMustacheExpression;
-@class GRMustacheTemplateRepository;
 @class GRMustacheContext;
+@class GRMustacheTemplateRepository;
 
 // Documented in GRMustacheTag.h
 typedef NS_ENUM(NSUInteger, GRMustacheTagType) {
     GRMustacheTagTypeVariable = 1 << 1 GRMUSTACHE_API_PUBLIC,
     GRMustacheTagTypeSection = 1 << 2 GRMUSTACHE_API_PUBLIC,
-    GRMustacheTagTypeOverridableSection = 1 << 3 GRMUSTACHE_API_PUBLIC,
-    GRMustacheTagTypeInvertedSection = 1 << 4 GRMUSTACHE_API_PUBLIC,
+    GRMustacheTagTypeInvertedSection = 1 << 3 GRMUSTACHE_API_PUBLIC,
 } GRMUSTACHE_API_PUBLIC;
 
 // Documented in GRMustacheTag.h
@@ -42,7 +41,6 @@ typedef NS_ENUM(NSUInteger, GRMustacheTagType) {
 @public
     GRMustacheTagType _type;
     GRMustacheExpression *_expression;
-    GRMustacheTemplateRepository *_templateRepository;
     GRMustacheContentType _contentType;
 }
 
@@ -51,10 +49,10 @@ typedef NS_ENUM(NSUInteger, GRMustacheTagType) {
 @property (nonatomic, readonly) GRMustacheTagType type GRMUSTACHE_API_PUBLIC;
 
 // Documented in GRMustacheTag.h
-@property (nonatomic, readonly) GRMustacheTemplateRepository *templateRepository GRMUSTACHE_API_PUBLIC;
+@property (nonatomic, readonly) NSString *innerTemplateString GRMUSTACHE_API_PUBLIC;
 
 // Documented in GRMustacheTag.h
-@property (nonatomic, readonly) NSString *innerTemplateString GRMUSTACHE_API_PUBLIC;
+@property (nonatomic, readonly) GRMustacheTemplateRepository *templateRepository GRMUSTACHE_API_PUBLIC_BUT_DEPRECATED;
 
 /**
  * Returns the content type of the receiver.
@@ -103,36 +101,11 @@ typedef NS_ENUM(NSUInteger, GRMustacheTagType) {
 /**
  * Returns a new GRMustacheTag.
  *
- * @param type                The tag type
- * @param templateRepository  The template repository exposed to the library
- *                            user via the public `templateRepository` property.
- *                            It is the template repository that provides the
- *                            template to which the tag belongs.
- * @param expression          The expression to be evaluated when rendering the
- *                            tag.
- * @param contentType         The content type of the tag rendering.
- *
- * @see templateRepository property
- * @see expression property
- * @see contentType property
+ * @param type         The tag type
+ * @param expression   The expression to be evaluated when rendering the tag.
+ * @param contentType  The content type of the tag rendering.
  */
-- (id)initWithType:(GRMustacheTagType)type templateRepository:(GRMustacheTemplateRepository *)templateRepository expression:(GRMustacheExpression *)expression contentType:(GRMustacheContentType)contentType GRMUSTACHE_API_INTERNAL;
-
-/**
- * Abstract method that returns a tag that represents the receiver overrided by
- * _overridingTag_.
- *
- * This method is used in the context of overridable partials, by the
- * GRMustacheTag implementation of
- * [GRMustacheTemplateComponent resolveTemplateComponent:].
- *
- * Default implementation raises an exception. GRMustacheSectionTag and
- * GRMustacheAccumulatorTag override it.
- *
- * @param overridingTag  The overriding tag
- * @return A tag that represents the receiver overrided by _overridingTag_.
- */
-- (GRMustacheTag *)tagWithOverridingTag:(GRMustacheTag *)overridingTag GRMUSTACHE_API_INTERNAL;
+- (id)initWithType:(GRMustacheTagType)type expression:(GRMustacheExpression *)expression contentType:(GRMustacheContentType)contentType GRMUSTACHE_API_INTERNAL;
 
 // Documented in GRMustacheTag.h
 - (NSString *)renderContentWithContext:(GRMustacheContext *)context HTMLSafe:(BOOL *)HTMLSafe error:(NSError **)error GRMUSTACHE_API_PUBLIC;

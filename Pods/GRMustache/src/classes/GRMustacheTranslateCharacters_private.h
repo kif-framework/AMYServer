@@ -1,6 +1,6 @@
 // The MIT License
 //
-// Copyright (c) 2013 Gwendal Roué
+// Copyright (c) 2014 Gwendal Roué
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,15 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#import <Foundation/Foundation.h>
 #import "GRMustacheAvailabilityMacros_private.h"
-#import "GRMustacheTag_private.h"
 
-/**
- * A tag that accumulates other tags in the context of overridable partials.
- */
-@interface GRMustacheAccumulatorTag : GRMustacheTag {
-@private
-    NSArray *_tags;
-}
-+ (instancetype)accumulatorTagWithTag:(GRMustacheTag *)tag GRMUSTACHE_API_INTERNAL;
-@end
+extern NSString *GRMustacheTranslateCharacters(NSString *string, NSString **escapeForCharacter, size_t escapeForCharacterLength, NSUInteger capacity) GRMUSTACHE_API_INTERNAL;
+extern NSString *GRMustacheTranslateHTMLCharacters(NSString *string) GRMUSTACHE_API_INTERNAL;

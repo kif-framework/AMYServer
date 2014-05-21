@@ -77,9 +77,16 @@ typedef CGPoint KIFDisplacement;
  */
 - (CGPoint)tappablePointInRect:(CGRect)rect;
 
+- (UIEvent *)eventWithTouch:(UITouch *)touch;
+
 /*!
  @abstract Evaluates if user interaction is enabled including edge cases.
  */
 - (BOOL)isUserInteractionActuallyEnabled;
+
+/*!
+ @abstract Returns either the current window or another window if a transform is applied.  Returns `nil` if all windows in the application have transforms.
+ */
+@property (nonatomic, readonly) UIWindow *windowOrIdentityWindow;
 
 @end

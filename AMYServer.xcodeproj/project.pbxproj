@@ -107,7 +107,7 @@
 		EB971414179657410005E31E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		EB971416179657410005E31E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		EB971417179657410005E31E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		EB971421179657770005E31E /* AMYServer Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AMYServer Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB971421179657770005E31E /* AMYServer Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AMYServer Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB971422179657770005E31E /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		EB971428179657770005E31E /* AMYServer Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMYServer Tests-Info.plist"; sourceTree = "<group>"; };
 		EB97142A179657770005E31E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -174,7 +174,7 @@
 			children = (
 				EB9713E617961CD20005E31E /* libAMYServer.a */,
 				EB9713FB179657410005E31E /* Test Host.app */,
-				EB971421179657770005E31E /* AMYServer Tests.octest */,
+				EB971421179657770005E31E /* AMYServer Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -331,7 +331,7 @@
 			);
 			name = "AMYServer Tests";
 			productName = "AMYServer Tests";
-			productReference = EB971421179657770005E31E /* AMYServer Tests.octest */;
+			productReference = EB971421179657770005E31E /* AMYServer Tests.xctest */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -658,7 +658,7 @@
 				INFOPLIST_FILE = "AMYServer Tests/AMYServer Tests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
+				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
 		};
@@ -672,7 +672,7 @@
 				INFOPLIST_FILE = "AMYServer Tests/AMYServer Tests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
+				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};

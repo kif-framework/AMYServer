@@ -1,6 +1,6 @@
 // The MIT License
 // 
-// Copyright (c) 2013 Gwendal Roué
+// Copyright (c) 2014 Gwendal Roué
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -44,18 +44,15 @@
 /**
  * Builds and returns a GRMustacheVariableTag.
  *
- * @param templateRepository  The template repository that owns the template
- *                            that owns this tag.
- * @param expression          The expression that would evaluate against a
- *                            rendering contex.
- * @param contentType         The content type of the tag rendering.
- * @param escapesHTML         YES if the value should be escaped. Ignored if
- *                            rendersHTML is NO.
+ * @param expression   The expression that would evaluate against a rendering
+ *                     contex.
+ * @param contentType  The content type of the tag rendering.
+ * @param escapesHTML  YES if the value should be escaped.
  *
  * @return a GRMustacheVariableTag
  *
  * @see GRMustacheExpression
  */
-+ (instancetype)variableTagWithTemplateRepository:(GRMustacheTemplateRepository *)templateRepository expression:(GRMustacheExpression *)expression contentType:(GRMustacheContentType)contentType escapesHTML:(BOOL)escapesHTML GRMUSTACHE_API_INTERNAL;
++ (instancetype)variableTagWithExpression:(GRMustacheExpression *)expression contentType:(GRMustacheContentType)contentType escapesHTML:(BOOL)escapesHTML GRMUSTACHE_API_INTERNAL;
 
 @end

@@ -1,6 +1,6 @@
 // The MIT License
 // 
-// Copyright (c) 2013 Gwendal Roué
+// Copyright (c) 2014 Gwendal Roué
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,39 +20,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#import <Foundation/Foundation.h>
 #import "GRMustacheAvailabilityMacros_private.h"
-#import "GRMustache_private.h"
-#import "GRMustacheTagDelegate.h"
-#import "GRMustacheTemplateComponent_private.h"
-#import "GRMustacheConfiguration_private.h"
+
+@class GRMustacheContext;
+@class GRMustachePartial;
+@class GRMustacheTemplateRepository;
+@protocol GRMustacheTagDelegate;
 
 // Documented in GRMustacheTemplate.h
-@interface GRMustacheTemplate: NSObject<GRMustacheTemplateComponent> {
+@interface GRMustacheTemplate: NSObject {
 @private
-    NSArray *_components;
+    GRMustacheTemplateRepository *_templateRepository;
+    GRMustachePartial *_partial;
     GRMustacheContext *_baseContext;
-    GRMustacheContentType _contentType;
 }
 
 /**
- * The GRMustacheTemplateComponent objects that make the template.
- *
- * @see GRMustacheTemplateComponent
+ * The underlying partial
  */
-@property (nonatomic, retain) NSArray *components GRMUSTACHE_API_INTERNAL;
-
-/**
- * Returns the content type of the receiver.
- *
- * For example:
- *
- * - `{{name}}`: GRMustacheContentTypeHTML
- * - `{{%CONTENT_TYPE:TEXT}}{{name}}`: GRMustacheContentTypeText
- */
-@property (nonatomic) GRMustacheContentType contentType GRMUSTACHE_API_INTERNAL;
+@property (nonatomic, retain) GRMustachePartial *partial GRMUSTACHE_API_INTERNAL;
 
 // Documented in GRMustacheTemplate.h
 @property (nonatomic, retain) GRMustacheContext *baseContext GRMUSTACHE_API_PUBLIC;
+
+// Documented in GRMustacheTemplate.h
+@property (nonatomic, retain) GRMustacheTemplateRepository *templateRepository GRMUSTACHE_API_PUBLIC;
 
 // Documented in GRMustacheTemplate.h
 - (void)extendBaseContextWithObject:(id)object GRMUSTACHE_API_PUBLIC;

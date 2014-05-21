@@ -1,6 +1,6 @@
 // The MIT License
 //
-// Copyright (c) 2013 Gwendal Roué
+// Copyright (c) 2014 Gwendal Roué
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,8 +21,8 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "GRMustacheRendering.h"
-#import "GRMustacheFilter.h"
+#import "GRMustacheRendering_private.h"
+#import "GRMustacheFilter_private.h"
 #import "GRMustacheTagDelegate.h"
 
 

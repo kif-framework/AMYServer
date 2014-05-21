@@ -1,6 +1,6 @@
 // The MIT License
 //
-// Copyright (c) 2013 Gwendal Roué
+// Copyright (c) 2014 Gwendal Roué
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,8 +22,6 @@
 
 #import <Foundation/Foundation.h>
 #import "GRMustacheAvailabilityMacros_private.h"
-
-@class GRMustacheExpression;
 
 /**
  * The kinds of tokens
@@ -83,16 +81,16 @@ typedef NS_ENUM(NSInteger, GRMustacheTokenType) {
     GRMustacheTokenTypePragma,
     
     /**
-     * The kind of tokens representing overridable partial tags such as
+     * The kind of tokens representing inheritable partial tags such as
      * `{{<name}}`.
      */
-    GRMustacheTokenTypeOverridablePartial,
+    GRMustacheTokenTypeInheritablePartial,
     
     /**
-     * The kind of tokens representing overridable ection opening tags such as
+     * The kind of tokens representing inheritable ection opening tags such as
      * `{{$name}}`.
      */
-    GRMustacheTokenTypeOverridableSectionOpening,
+    GRMustacheTokenTypeInheritableSectionOpening,
 };
 
 /**
@@ -163,10 +161,10 @@ typedef NS_ENUM(NSInteger, GRMustacheTokenType) {
  * - GRMustacheTokenTypeComment;
  * - GRMustacheTokenTypeSectionOpening;
  * - GRMustacheTokenTypeInvertedSectionOpening;
- * - GRMustacheTokenTypeOverridableSectionOpening;
+ * - GRMustacheTokenTypeInheritableSectionOpening;
  * - GRMustacheTokenTypeClosing;
  * - GRMustacheTokenTypePartial;
- * - GRMustacheTokenTypeOverridablePartial;
+ * - GRMustacheTokenTypeInheritablePartial;
  * - GRMustacheTokenTypeUnescapedVariable;
  * - GRMustacheTokenTypePragma;
  * - GRMustacheTokenTypeEscapedVariable;

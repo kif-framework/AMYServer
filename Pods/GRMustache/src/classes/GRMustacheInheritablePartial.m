@@ -1,6 +1,6 @@
 // The MIT License
 //
-// Copyright (c) 2013 Gwendal Roué
+// Copyright (c) 2014 Gwendal Roué
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,40 +20,40 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "GRMustacheTemplateOverride_private.h"
-#import "GRMustacheTemplate_private.h"
+#import "GRMustacheInheritablePartial_private.h"
+#import "GRMustachePartial_private.h"
 #import "GRMustacheContext_private.h"
 
-@interface GRMustacheTemplateOverride()
-- (id)initWithTemplate:(GRMustacheTemplate *)template components:(NSArray *)components;
+@interface GRMustacheInheritablePartial()
+- (id)initWithPartial:(GRMustachePartial *)partial components:(NSArray *)components;
 @end
 
-@implementation GRMustacheTemplateOverride
-@synthesize template=_template;
+@implementation GRMustacheInheritablePartial
+@synthesize partial=_partial;
 
-+ (instancetype)templateOverrideWithTemplate:(GRMustacheTemplate *)template components:(NSArray *)components
++ (instancetype)inheritablePartialWithPartial:(GRMustachePartial *)partial components:(NSArray *)components
 {
-    return [[[self alloc] initWithTemplate:template components:components] autorelease];
+    return [[[self alloc] initWithPartial:partial components:components] autorelease];
 }
 
 - (void)dealloc
 {
-    [_template release];
+    [_partial release];
     [_components release];
     [super dealloc];
 }
 
 #pragma mark - GRMustacheTemplateComponent
 
-- (BOOL)renderContentType:(GRMustacheContentType)requiredContentType inBuffer:(NSMutableString *)buffer withContext:(GRMustacheContext *)context error:(NSError **)error
+- (BOOL)renderContentType:(GRMustacheContentType)requiredContentType inBuffer:(GRMustacheBuffer *)buffer withContext:(GRMustacheContext *)context error:(NSError **)error
 {
-    context = [context contextByAddingTemplateOverride:self];
-    return [_template renderContentType:requiredContentType inBuffer:buffer withContext:context error:error];
+    context = [context contextByAddingInheritablePartial:self];
+    return [_partial renderContentType:requiredContentType inBuffer:buffer withContext:context error:error];
 }
 
 - (id<GRMustacheTemplateComponent>)resolveTemplateComponent:(id<GRMustacheTemplateComponent>)component
 {
-    // look for the last overriding component in inner components
+    // look for the last inheritable component in inner components
     for (id<GRMustacheTemplateComponent> innerComponent in _components) {
         component = [innerComponent resolveTemplateComponent:component];
     }
@@ -63,11 +63,11 @@
 
 #pragma mark - Private
 
-- (id)initWithTemplate:(GRMustacheTemplate *)template components:(NSArray *)components
+- (id)initWithPartial:(GRMustachePartial *)partial components:(NSArray *)components
 {
     self = [super init];
     if (self) {
-        _template = [template retain];
+        _partial = [partial retain];
         _components = [components retain];
     }
     return self;

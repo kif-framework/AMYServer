@@ -1,6 +1,6 @@
 // The MIT License
 // 
-// Copyright (c) 2013 Gwendal Roué
+// Copyright (c) 2014 Gwendal Roué
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,8 +21,6 @@
 // THE SOFTWARE.
 
 #import "GRMustacheStandardLibrary_private.h"
-#import "GRMustache_private.h"
-#import "GRMustacheRendering.h"
 
 
 // =============================================================================
@@ -111,7 +109,7 @@
     }
     
     if (![object isKindOfClass:[NSDictionary class]] && [object respondsToSelector:@selector(countByEnumeratingWithState:objects:count:)]) {
-        for (id _ in object) {
+        for (id _ __attribute__((unused)) in object) {
             return [NSNumber numberWithBool:NO];
         }
         return [NSNumber numberWithBool:YES];
@@ -138,7 +136,7 @@
     }
     
     if (![object isKindOfClass:[NSDictionary class]] && [object respondsToSelector:@selector(countByEnumeratingWithState:objects:count:)]) {
-        for (id _ in object) {
+        for (id _ __attribute__((unused)) in object) {
             return [NSNumber numberWithBool:NO];
         }
         return [NSNumber numberWithBool:YES];
