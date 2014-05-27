@@ -35,7 +35,7 @@ AMYServer can be installed with a [CocoaPods](http://cocoapods.org).
 
 ```Ruby
 target 'Acceptance Tests' do
-  pod 'AMYServer', '~> 1.0'
+  pod 'AMYServer', '~> 2.0'
 end
 ```
 
@@ -68,7 +68,7 @@ The first step is to define your server with the API it will use:
 **ExampleServer.m**
 
     #import "ExampleServer.h"
-    
+
     @implementation ExampleServer
 
 	- (NSURL *)baseURL
@@ -85,7 +85,7 @@ The first step is to define your server with the API it will use:
     }
 
     @end
-    
+
 1. Define the base URL that the server will respond to.
 2. Select a mock to use for your response and values to use.
 
@@ -132,7 +132,7 @@ Once configured, you can write a test that uses it.
         [exampleServer waitForLoginAndRespondWithMessage:@"Welcome, Brian" token:@"12345"]; // (3)
         [tester waitForViewWithAccessibilityLabel:@"Welcome, Brian"]; // (4)
     }
-    
+
     @end
 
 1. Start mocking.
@@ -161,17 +161,17 @@ Using these, we can enhance the login test step to validate the username and pas
     {
         [self waitForRequestMatchingMocktail:@"successful-login"
               withHTTPBodyMatchingBlock:^KIFTestStepResult(NSData *body, NSError *__autoreleasing *error) {
-              
+
                   id json = [NSJSONSerialization JSONObjectWithData:body options:0 error:NULL];
                   KIFTestWaitCondition([json[@"username"] isEqualToString:username], error, @"Could not find username");
                   KIFTestWaitCondition([json[@"password"] isEqualToString:password], error, @"Could not find password");
                   return KIFTestStepResultSuccess;
-              } 
+              }
               andRespondWithValues:@{@"token": token ?: @"", @"message": message ?: @""}];
     }
 
     @end
-    
+
 In this case, AMYServer will ignore requests that don't have the correct username and password and provide a meaningful error.
 
 **successful-login.tail**
@@ -181,7 +181,7 @@ In this case, AMYServer will ignore requests that don't have the correct usernam
 	200
 	application/json
 	X-Application-Token: {{{token}}}
-	
+
 	{
 	    "success": true,
     	"message": "{{{message}}}",
@@ -211,7 +211,7 @@ AMYServer is not limited to just Mocktails.  It can be use for serving images, 1
             KIFTestWaitCondition([request.URL.lastPathComponent isEqualToString:@"image.do"], error, @"Could not find request for image.do");
             return KIFTestStepResultSuccess;
         }];
-        
+
         [request respondWithSatusCode:200 headerFields:@{@"Content-Size": @"1000000"}];
         while (!done) {
 	        [request sendData:moreData];
@@ -219,5 +219,5 @@ AMYServer is not limited to just Mocktails.  It can be use for serving images, 1
 	    }
         [request close];
     }
-    
+
 First we wait for a request matching whatever rule we want.  In this case, the last path component should be "image.do".  Then we send the response header and slowly build up the body before closing.  The important thing here is that we can run any sort of actions we want while the data is returned.
