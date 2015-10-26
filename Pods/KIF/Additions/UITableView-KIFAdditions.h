@@ -11,6 +11,6 @@
 
 @interface UITableView (KIFAdditions)
 
-- (BOOL)dragCell:(UITableViewCell *)cell toIndexPath:(NSIndexPath *)indexPath error:(NSError **)error;
+- (void)dragCell:(UITableViewCell *)cell toIndexPath:(NSIndexPath *)indexPath error:(NSError **)error;
 
 @end

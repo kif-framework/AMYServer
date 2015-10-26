@@ -34,6 +34,7 @@
 		EB971412179657410005E31E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EB971411179657410005E31E /* Default-568h@2x.png */; };
 		EB971415179657410005E31E /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB971413179657410005E31E /* MainStoryboard.storyboard */; };
 		EB971418179657410005E31E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB971417179657410005E31E /* ViewController.m */; };
+		EB971423179657770005E31E /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB971422179657770005E31E /* SenTestingKit.framework */; };
 		EB971424179657770005E31E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB9713FC179657410005E31E /* UIKit.framework */; };
 		EB971425179657770005E31E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB9713E917961CD20005E31E /* Foundation.framework */; };
 		EB97142B179657770005E31E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB971429179657770005E31E /* InfoPlist.strings */; };
@@ -71,12 +72,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		11F29E78EBF54D7DB567C2F0 /* Pods-AMYServer Tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AMYServer Tests.xcconfig"; path = "Pods/Pods-AMYServer Tests.xcconfig"; sourceTree = SOURCE_ROOT; };
 		2CFA695D96E74AD0B14ECB01 /* libPods-AMYServer Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AMYServer Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		660DAD8CDF4041B6ADB992C7 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		7C65A889641443929FA2D0A6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		954E4962956A2394FC48E457 /* Pods-AMYServer Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AMYServer Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AMYServer Tests/Pods-AMYServer Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		C6CB5839C6B699B650FD357D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		D41FB34884C121FDA742636A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		E635D47DDCF95BABD2754EF2 /* Pods-AMYServer Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AMYServer Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AMYServer Tests/Pods-AMYServer Tests.release.xcconfig"; sourceTree = "<group>"; };
 		EB23AA7217AB61F1002B6399 /* AMYMocktailResponseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMYMocktailResponseTests.m; sourceTree = "<group>"; };
 		EB23AA7417AB6229002B6399 /* xml.tail */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = xml.tail; sourceTree = "<group>"; };
 		EB23AA7617AB62D9002B6399 /* xml.tail.defaults.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = xml.tail.defaults.json; sourceTree = "<group>"; };
@@ -109,6 +108,7 @@
 		EB971416179657410005E31E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		EB971417179657410005E31E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		EB971421179657770005E31E /* AMYServer Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AMYServer Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB971422179657770005E31E /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		EB971428179657770005E31E /* AMYServer Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMYServer Tests-Info.plist"; sourceTree = "<group>"; };
 		EB97142A179657770005E31E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EB97142F179657770005E31E /* AMYServer Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMYServer Tests-Prefix.pch"; sourceTree = "<group>"; };
@@ -146,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB971423179657770005E31E /* SenTestingKit.framework in Frameworks */,
 				EB971424179657770005E31E /* UIKit.framework in Frameworks */,
 				EB971425179657770005E31E /* Foundation.framework in Frameworks */,
 				D8941B57AA6B462F808362B6 /* libPods-AMYServer Tests.a in Frameworks */,
@@ -155,17 +156,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6F1C6DF3BF4BEB9A4AEA6A64 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				C6CB5839C6B699B650FD357D /* Pods.debug.xcconfig */,
-				D41FB34884C121FDA742636A /* Pods.release.xcconfig */,
-				954E4962956A2394FC48E457 /* Pods-AMYServer Tests.debug.xcconfig */,
-				E635D47DDCF95BABD2754EF2 /* Pods-AMYServer Tests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		EB9713DD17961CD20005E31E = {
 			isa = PBXGroup;
 			children = (
@@ -174,7 +164,8 @@
 				EB971426179657770005E31E /* AMYServer Tests */,
 				EB9713E817961CD20005E31E /* Frameworks */,
 				EB9713E717961CD20005E31E /* Products */,
-				6F1C6DF3BF4BEB9A4AEA6A64 /* Pods */,
+				660DAD8CDF4041B6ADB992C7 /* Pods.xcconfig */,
+				11F29E78EBF54D7DB567C2F0 /* Pods-AMYServer Tests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -194,6 +185,7 @@
 				EB9713E917961CD20005E31E /* Foundation.framework */,
 				EB9713FC179657410005E31E /* UIKit.framework */,
 				EB9713FF179657410005E31E /* CoreGraphics.framework */,
+				EB971422179657770005E31E /* SenTestingKit.framework */,
 				7C65A889641443929FA2D0A6 /* libPods.a */,
 				2CFA695D96E74AD0B14ECB01 /* libPods-AMYServer Tests.a */,
 			);
@@ -331,7 +323,6 @@
 				EB97141E179657770005E31E /* Resources */,
 				EB97141F179657770005E31E /* ShellScript */,
 				7ECFE7FA6EA248D68FDB004A /* Copy Pods Resources */,
-				E64F14F0683C310502B763F2 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -341,7 +332,7 @@
 			name = "AMYServer Tests";
 			productName = "AMYServer Tests";
 			productReference = EB971421179657770005E31E /* AMYServer Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
+			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -416,7 +407,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7ECFE7FA6EA248D68FDB004A /* Copy Pods Resources */ = {
@@ -431,22 +422,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AMYServer Tests/Pods-AMYServer Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E64F14F0683C310502B763F2 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AMYServer Tests/Pods-AMYServer Tests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Pods-AMYServer Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E79771CA95A84C55A073E35A /* Check Pods Manifest.lock */ = {
@@ -475,7 +451,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "";
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
 		F13796A2765D4387BC1B60A2 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -623,15 +599,12 @@
 		};
 		EB9713F517961CD20005E31E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C6CB5839C6B699B650FD357D /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 660DAD8CDF4041B6ADB992C7 /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/AMYServer.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMYServer/AMYServer-Prefix.pch";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -639,15 +612,12 @@
 		};
 		EB9713F617961CD20005E31E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D41FB34884C121FDA742636A /* Pods.release.xcconfig */;
+			baseConfigurationReference = 660DAD8CDF4041B6ADB992C7 /* Pods.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/AMYServer.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AMYServer/AMYServer-Prefix.pch";
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -680,7 +650,7 @@
 		};
 		EB971431179657770005E31E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 954E4962956A2394FC48E457 /* Pods-AMYServer Tests.debug.xcconfig */;
+			baseConfigurationReference = 11F29E78EBF54D7DB567C2F0 /* Pods-AMYServer Tests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Test Host.app/Test Host";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -694,7 +664,7 @@
 		};
 		EB971432179657770005E31E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E635D47DDCF95BABD2754EF2 /* Pods-AMYServer Tests.release.xcconfig */;
+			baseConfigurationReference = 11F29E78EBF54D7DB567C2F0 /* Pods-AMYServer Tests.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Test Host.app/Test Host";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

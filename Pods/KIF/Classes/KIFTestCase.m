@@ -15,11 +15,6 @@
 #define SIG(class, selector) [class instanceMethodSignatureForSelector:selector]
 
 @implementation KIFTestCase
-{
-    NSException *_stoppingException;
-}
-
-NSComparisonResult selectorSort(NSInvocation *invocOne, NSInvocation *invocTwo, void *reverse);
 
 + (id)defaultTestSuite
 {
@@ -38,7 +33,11 @@ NSComparisonResult selectorSort(NSInvocation *invocOne, NSInvocation *invocTwo, 
         return nil;
     }
 
+#ifndef KIF_SENTEST
     self.continueAfterFailure = NO;
+#else
+    [self raiseAfterFailure];
+#endif
     return self;
 }
 
@@ -47,49 +46,34 @@ NSComparisonResult selectorSort(NSInvocation *invocOne, NSInvocation *invocTwo, 
 - (void)beforeAll  { }
 - (void)afterAll   { }
 
-NSComparisonResult selectorSort(NSInvocation *invocOne, NSInvocation *invocTwo, void *reverse) {
-    
-    NSString *selectorOne =  NSStringFromSelector([invocOne selector]);
-    NSString *selectorTwo =  NSStringFromSelector([invocTwo selector]);
-    return [selectorOne compare:selectorTwo options:NSCaseInsensitiveSearch];
+#ifndef KIF_SENTEST
+
+- (void)setUp;
+{
+    [self beforeEach];
 }
 
-+ (NSArray *)testInvocations
+- (void)tearDown;
 {
-    NSArray *disorderedInvoc = [super testInvocations];
-    NSArray *newArray = [disorderedInvoc sortedArrayUsingFunction:selectorSort context:NULL];
-    return newArray;
+    [self afterEach];
 }
 
 + (void)setUp
 {
-    [self performSetupTearDownWithSelector:@selector(beforeAll)];
+    [[self new] beforeAll];
 }
 
 + (void)tearDown
 {
-    [self performSetupTearDownWithSelector:@selector(afterAll)];
+    [[self new] afterAll];
 }
 
-+ (void)performSetupTearDownWithSelector:(SEL)selector
-{
-    KIFTestCase *testCase = [self testCaseWithSelector:selector];
-    if ([testCase respondsToSelector:selector]) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [testCase performSelector:selector];
-#pragma clang diagnostic pop
-    }
-
-    if (testCase->_stoppingException) {
-        [testCase->_stoppingException raise];
-    }
-}
+#else
 
 - (void)setUp;
 {
     [super setUp];
-    
+
     if ([self isNotBeforeOrAfter]) {
         [self beforeEach];
     }
@@ -100,8 +84,31 @@ NSComparisonResult selectorSort(NSInvocation *invocOne, NSInvocation *invocTwo, 
     if ([self isNotBeforeOrAfter]) {
         [self afterEach];
     }
-    
+
     [super tearDown];
+}
+
++ (NSArray *)testInvocations;
+{
+    if (self == [KIFTestCase class]) {
+        return nil;
+    }
+    
+    NSMutableArray *testInvocations = [NSMutableArray arrayWithArray:[super testInvocations]];
+    
+    if ([self instancesRespondToSelector:@selector(beforeAll)]) {
+        NSInvocation *beforeAll = [NSInvocation invocationWithMethodSignature:SIG(self, @selector(beforeAll))];
+        beforeAll.selector = @selector(beforeAll);
+        [testInvocations insertObject:beforeAll atIndex:0];
+    }
+    
+    if ([self instancesRespondToSelector:@selector(afterAll)]) {
+        NSInvocation *afterAll = [NSInvocation invocationWithMethodSignature:SIG(self, @selector(afterAll))];
+        afterAll.selector = @selector(afterAll);
+        [testInvocations addObject:afterAll];
+    }
+    
+    return testInvocations;
 }
 
 - (BOOL)isNotBeforeOrAfter;
@@ -110,10 +117,12 @@ NSComparisonResult selectorSort(NSInvocation *invocOne, NSInvocation *invocTwo, 
     return selector != @selector(beforeAll) && selector != @selector(afterAll);
 }
 
+#endif
+
 - (void)failWithException:(NSException *)exception stopTest:(BOOL)stop
 {
     if (stop) {
-        _stoppingException = exception;
+        [self writeScreenshotForException:exception];
     }
     
     if (stop && self.stopTestsOnFirstBigFailure) {
@@ -127,6 +136,15 @@ NSComparisonResult selectorSort(NSInvocation *invocOne, NSInvocation *invocTwo, 
     } else {
         [super failWithException:exception stopTest:stop];
     }
+}
+
+- (void)writeScreenshotForException:(NSException *)exception;
+{
+#ifndef KIF_SENTEST
+    [[UIApplication sharedApplication] writeScreenshotForLine:[exception.userInfo[@"SenTestLineNumberKey"] unsignedIntegerValue] inFile:exception.userInfo[@"SenTestFilenameKey"] description:nil error:NULL];
+#else
+    [[UIApplication sharedApplication] writeScreenshotForLine:exception.lineNumber.unsignedIntegerValue inFile:exception.filename description:nil error:NULL];
+#endif
 }
 
 @end
