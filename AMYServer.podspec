@@ -9,24 +9,6 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '5.1'
   s.requires_arc = true
   s.dependency 'GRMustache', '~> 7.0'
-
-  s.default_subspec = 'XCTest'
-
-  s.subspec 'OCUnit' do |sentest|
-    sentest.source_files = 'AMYServer'
-    sentest.dependency 'KIF/OCUnit', '~> 3.0'
-
-    # I would expect the following to be inherited but lint disagrees.
-    sentest.framework = 'SenTestingKit'
-    sentest.xcconfig = { 'OTHER_CFLAGS' => '-DKIF_SENTEST' }
-  end
-
-  s.subspec 'XCTest' do |xctest|
-    xctest.source_files = 'AMYServer'
-    xctest.dependency 'KIF/XCTest', '~> 3.0'
-
-    # I would expect the following to be inherited but lint disagrees.
-    xctest.framework = 'XCTest'
-    xctest.xcconfig = { 'OTHER_CFLAGS' => '-DKIF_XCTEST' }
-  end
+  s.dependency 'KIF', '~> 3.0'
+  s.framework = 'XCTest'
 end

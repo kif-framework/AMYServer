@@ -28,7 +28,7 @@
 #import "GRMustacheJavascriptLibrary_private.h"
 #import "GRMustacheHTMLLibrary_private.h"
 #import "GRMustacheURLLibrary_private.h"
-#import "GRMustacheBuffer_private.h"
+#import "GRMustacheEachFilter_private.h"
 #import "GRMustacheLocalizer.h"
 
 
@@ -75,8 +75,11 @@
                             [[[GRMustacheEmptyFilter alloc] init] autorelease], @"isEmpty",
                             
                             // {{ localize(value) }}
-                            // {{^ localize }}...{{/}}
+                            // {{# localize }}...{{/}}
                             [[[GRMustacheLocalizer alloc] initWithBundle:nil tableName:nil] autorelease], @"localize",
+                            
+                            // {{# each(collection) }}...{{/}}
+                            [[[GRMustacheEachFilter alloc] init] autorelease], @"each",
                             
                             [NSDictionary dictionaryWithObjectsAndKeys:
                              

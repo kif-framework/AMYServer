@@ -1,18 +1,18 @@
 PODS:
-  - GRMustache (7.0.2):
+  - GRMustache (7.3.2):
     - JRSwizzle (~> 1.0)
   - JRSwizzle (1.0)
-  - KIF (3.0.4):
-    - KIF/XCTest
-  - KIF/XCTest (3.0.4)
+  - KIF (3.3.0):
+    - KIF/Core (= 3.3.0)
+  - KIF/Core (3.3.0)
 
 DEPENDENCIES:
   - GRMustache (~> 7.0)
   - KIF (~> 3.0)
 
 SPEC CHECKSUMS:
-  GRMustache: 7cce2570d81711b90d91d2e539f6f575a703db22
-  JRSwizzle: 30da7a2c539a4ebf954b16d15f6dd8221c9f6fa5
-  KIF: 443c517d14fc2a99d27d3df170bc274cdf288241
+  GRMustache: ebe6104fd30a6d22c1f36af131e19e2dbf7cd292
+  JRSwizzle: dd5ead5d913a0f29e7f558200165849f006bb1e3
+  KIF: 0a82046d06f3648799cac522d2d0f7934214caac
 
-COCOAPODS: 0.32.1
+COCOAPODS: 0.39.0
