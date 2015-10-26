@@ -34,7 +34,6 @@
 		EB971412179657410005E31E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EB971411179657410005E31E /* Default-568h@2x.png */; };
 		EB971415179657410005E31E /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB971413179657410005E31E /* MainStoryboard.storyboard */; };
 		EB971418179657410005E31E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB971417179657410005E31E /* ViewController.m */; };
-		EB971423179657770005E31E /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB971422179657770005E31E /* SenTestingKit.framework */; };
 		EB971424179657770005E31E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB9713FC179657410005E31E /* UIKit.framework */; };
 		EB971425179657770005E31E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB9713E917961CD20005E31E /* Foundation.framework */; };
 		EB97142B179657770005E31E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB971429179657770005E31E /* InfoPlist.strings */; };
@@ -110,7 +109,6 @@
 		EB971416179657410005E31E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		EB971417179657410005E31E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		EB971421179657770005E31E /* AMYServer Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AMYServer Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EB971422179657770005E31E /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		EB971428179657770005E31E /* AMYServer Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AMYServer Tests-Info.plist"; sourceTree = "<group>"; };
 		EB97142A179657770005E31E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EB97142F179657770005E31E /* AMYServer Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AMYServer Tests-Prefix.pch"; sourceTree = "<group>"; };
@@ -148,7 +146,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB971423179657770005E31E /* SenTestingKit.framework in Frameworks */,
 				EB971424179657770005E31E /* UIKit.framework in Frameworks */,
 				EB971425179657770005E31E /* Foundation.framework in Frameworks */,
 				D8941B57AA6B462F808362B6 /* libPods-AMYServer Tests.a in Frameworks */,
@@ -197,7 +194,6 @@
 				EB9713E917961CD20005E31E /* Foundation.framework */,
 				EB9713FC179657410005E31E /* UIKit.framework */,
 				EB9713FF179657410005E31E /* CoreGraphics.framework */,
-				EB971422179657770005E31E /* SenTestingKit.framework */,
 				7C65A889641443929FA2D0A6 /* libPods.a */,
 				2CFA695D96E74AD0B14ECB01 /* libPods-AMYServer Tests.a */,
 			);
@@ -479,7 +475,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+			shellScript = "";
 		};
 		F13796A2765D4387BC1B60A2 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
