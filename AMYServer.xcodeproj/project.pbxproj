@@ -72,10 +72,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		11F29E78EBF54D7DB567C2F0 /* Pods-AMYServer Tests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AMYServer Tests.xcconfig"; path = "Pods/Pods-AMYServer Tests.xcconfig"; sourceTree = SOURCE_ROOT; };
 		2CFA695D96E74AD0B14ECB01 /* libPods-AMYServer Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AMYServer Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		660DAD8CDF4041B6ADB992C7 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		7C65A889641443929FA2D0A6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		954E4962956A2394FC48E457 /* Pods-AMYServer Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AMYServer Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AMYServer Tests/Pods-AMYServer Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		C6CB5839C6B699B650FD357D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		D41FB34884C121FDA742636A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		E635D47DDCF95BABD2754EF2 /* Pods-AMYServer Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AMYServer Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AMYServer Tests/Pods-AMYServer Tests.release.xcconfig"; sourceTree = "<group>"; };
 		EB23AA7217AB61F1002B6399 /* AMYMocktailResponseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMYMocktailResponseTests.m; sourceTree = "<group>"; };
 		EB23AA7417AB6229002B6399 /* xml.tail */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = xml.tail; sourceTree = "<group>"; };
 		EB23AA7617AB62D9002B6399 /* xml.tail.defaults.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = xml.tail.defaults.json; sourceTree = "<group>"; };
@@ -156,6 +158,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F1C6DF3BF4BEB9A4AEA6A64 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C6CB5839C6B699B650FD357D /* Pods.debug.xcconfig */,
+				D41FB34884C121FDA742636A /* Pods.release.xcconfig */,
+				954E4962956A2394FC48E457 /* Pods-AMYServer Tests.debug.xcconfig */,
+				E635D47DDCF95BABD2754EF2 /* Pods-AMYServer Tests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		EB9713DD17961CD20005E31E = {
 			isa = PBXGroup;
 			children = (
@@ -164,8 +177,7 @@
 				EB971426179657770005E31E /* AMYServer Tests */,
 				EB9713E817961CD20005E31E /* Frameworks */,
 				EB9713E717961CD20005E31E /* Products */,
-				660DAD8CDF4041B6ADB992C7 /* Pods.xcconfig */,
-				11F29E78EBF54D7DB567C2F0 /* Pods-AMYServer Tests.xcconfig */,
+				6F1C6DF3BF4BEB9A4AEA6A64 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -323,6 +335,7 @@
 				EB97141E179657770005E31E /* Resources */,
 				EB97141F179657770005E31E /* ShellScript */,
 				7ECFE7FA6EA248D68FDB004A /* Copy Pods Resources */,
+				E64F14F0683C310502B763F2 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -332,7 +345,7 @@
 			name = "AMYServer Tests";
 			productName = "AMYServer Tests";
 			productReference = EB971421179657770005E31E /* AMYServer Tests.xctest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -407,7 +420,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7ECFE7FA6EA248D68FDB004A /* Copy Pods Resources */ = {
@@ -422,7 +435,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-AMYServer Tests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AMYServer Tests/Pods-AMYServer Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E64F14F0683C310502B763F2 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AMYServer Tests/Pods-AMYServer Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E79771CA95A84C55A073E35A /* Check Pods Manifest.lock */ = {
@@ -599,7 +627,7 @@
 		};
 		EB9713F517961CD20005E31E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 660DAD8CDF4041B6ADB992C7 /* Pods.xcconfig */;
+			baseConfigurationReference = C6CB5839C6B699B650FD357D /* Pods.debug.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/AMYServer.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -615,7 +643,7 @@
 		};
 		EB9713F617961CD20005E31E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 660DAD8CDF4041B6ADB992C7 /* Pods.xcconfig */;
+			baseConfigurationReference = D41FB34884C121FDA742636A /* Pods.release.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/AMYServer.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -656,7 +684,7 @@
 		};
 		EB971431179657770005E31E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 11F29E78EBF54D7DB567C2F0 /* Pods-AMYServer Tests.xcconfig */;
+			baseConfigurationReference = 954E4962956A2394FC48E457 /* Pods-AMYServer Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Test Host.app/Test Host";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -670,7 +698,7 @@
 		};
 		EB971432179657770005E31E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 11F29E78EBF54D7DB567C2F0 /* Pods-AMYServer Tests.xcconfig */;
+			baseConfigurationReference = E635D47DDCF95BABD2754EF2 /* Pods-AMYServer Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Test Host.app/Test Host";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
