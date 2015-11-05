@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Brian Nickel. All rights reserved.
 //
 
-#import <KIF.h>
+#import <KIF/KIF.h>
 #import "AMYRequest.h"
 
 @interface AMYServer : KIFTestActor

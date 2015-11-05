@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <KIFTestActor.h>
+#import <KIF/KIFTestActor.h>
 
 @class AMYRequest;
 

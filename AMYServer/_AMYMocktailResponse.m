@@ -10,7 +10,7 @@
 
 #import <Foundation/Foundation.h>
 #import "_AMYMocktailResponse.h"
-#import <GRMustache.h>
+#import <GRMustache/GRMustache.h>
 
 NSString * const _AMYMocktailFileExtension = @"tail";
 

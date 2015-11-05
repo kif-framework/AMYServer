@@ -10,8 +10,8 @@
 #import "_AMYURLProtocol.h"
 #import "_AMYMocktailResponse.h"
 #import "AMYRequest.h"
-#import <NSBundle-KIFAdditions.h>
-#import <NSError-KIFAdditions.h>
+#import <KIF/NSBundle-KIFAdditions.h>
+#import <KIF/NSError-KIFAdditions.h>
 
 @implementation AMYServer
 
