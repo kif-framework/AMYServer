@@ -8,6 +8,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/kif-framework/AMYServer.git", :tag => "v2.1.0" }
   s.platform     = :ios, '5.1'
   s.requires_arc = true
+  s.source_files = 'AMYServer'
   s.dependency     'GRMustache', '~> 7.0'
   s.dependency     'KIF', '~> 3.0'
   s.framework    = 'XCTest'
