@@ -61,13 +61,23 @@
 
 - (void)waitForRequestMatchingMocktail:(NSString *)mocktail andRespondWithValues:(NSDictionary *)values
 {
-    [self waitForRequestMatchingMocktail:mocktail withHTTPBodyMatchingBlock:nil andRespondWithValues:values];
+    [self waitForRequestMatchingMocktail:mocktail bundle:[NSBundle KIFTestBundle] andRespondWithValues:values];
+}
+
+- (void)waitForRequestMatchingMocktail:(NSString *)mocktail bundle:(NSBundle *)bundle andRespondWithValues:(NSDictionary *)values
+{
+    [self waitForRequestMatchingMocktail:mocktail bundle:bundle withHTTPBodyMatchingBlock:nil andRespondWithValues:values];
 }
 
 - (void)waitForRequestMatchingMocktail:(NSString *)mocktail withHTTPBodyMatchingBlock:(KIFTestStepResult (^)(NSData *, NSError *__autoreleasing *))block andRespondWithValues:(NSDictionary *)values
 {
+    return [self waitForRequestMatchingMocktail:mocktail bundle:[NSBundle KIFTestBundle] withHTTPBodyMatchingBlock:block andRespondWithValues:values];
+}
+
+- (void)waitForRequestMatchingMocktail:(NSString *)mocktail bundle:(NSBundle *)bundle withHTTPBodyMatchingBlock:(KIFTestStepResult (^)(NSData *, NSError *__autoreleasing *))block andRespondWithValues:(NSDictionary *)values
+{
     NSError *error = nil;
-    _AMYMocktailResponse *response = [_AMYMocktailResponse responseFromTail:mocktail bundle:[NSBundle KIFTestBundle] error:&error];
+    _AMYMocktailResponse *response = [_AMYMocktailResponse responseFromTail:mocktail bundle:bundle error:&error];
     
     if (error) {
         [self failWithError:[NSError KIFErrorWithUnderlyingError:error format:@"Failed to load mocktail: %@", error.localizedDescription] stopTest:YES];
